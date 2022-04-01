@@ -1,5 +1,7 @@
 # Team MACK 
-## Something (SMTHG MUSICAL) Musical - project 3
+
+# Something Musical (SMTHNG MSCL) - project 3 *client*
+- FrontEnd Development
 
 ### Description
 Search for the artists you love, connect with other fans of similar music taste, and check out the upcoming events being put on by said artist at a venue near to you!
@@ -16,7 +18,6 @@ Search for the artists you love, connect with other fans of similar music taste,
 
 ## Technologies Used
 - JavaScript
-- REACT
 - Mongoose
 - Express 
 - Bootstrap
@@ -33,5 +34,5 @@ This will be edited eventually to include more routes.......
 | `/change-password` | `ChangePassword`  | Yes |
 | `/sign-out`        | `SignOut`   | Yes |
  
-# WireFrames - ERD (included)
-.....to be added here......
+# WireFrames 
+![img](wireframe.jpg)
