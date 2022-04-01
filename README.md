@@ -24,7 +24,7 @@ Search for the artists you love, connect with other fans of similar music taste,
 
 
 ### Routes Table
-
+ this is a minor edit
 This will be edited eventually to include more routes.......
 
 | Endpoint         | Component | `AuthenticatedRoute`? |
