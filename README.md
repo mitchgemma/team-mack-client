@@ -35,4 +35,4 @@ This will be edited eventually to include more routes.......
 | `/sign-out`        | `SignOut`   | Yes |
  
 # WireFrames 
-![img](wireframe.jpg)
+![img](wireframe.jpg)  
