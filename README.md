@@ -32,6 +32,6 @@ This will be edited eventually to include more routes.......
 | `/sign-in`       | `SignIn`    | No |
 | `/change-password` | `ChangePassword`  | Yes |
 | `/sign-out`        | `SignOut`   | Yes |
-
+ 
 # WireFrames - ERD (included)
 .....to be added here......
