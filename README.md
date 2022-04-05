@@ -1,14 +1,16 @@
 # Team MACK 
 
-# Something Musical (SMTHNG MSCL) - project 3 *client*
+# Something Musical (SMTHNG MSCL) App - Project 3 
 - FrontEnd Development
 
-### Description
-Search for the artists you love, connect with other fans of similar music taste, and check out the upcoming events being put on by said artist at a venue near to you!
+
+## Description
+
+Search for the artists, events and/or venues you favorite, connect with other fans of similar music taste.
 ----------------------------------------------------------------------------
 
 
-## USER STORY
+# USER STORY
 **As A User:**
 - Have the ability to find events, venues or artists that interests them 
 - Have the ability to keep track of their favorite artists
@@ -16,15 +18,15 @@ Search for the artists you love, connect with other fans of similar music taste,
 - Users should be able to comment, like and maintain a favorites log of songs of their interest and on other songs as well 
 
 
-## Technologies Used
+# Technologies Used
 - JavaScript
 - Mongoose
 - Express 
 - Bootstrap
 
 
-### Routes Table
- this is a minor edit
+# Routes Table
+
 This will be edited eventually to include more routes.......
 
 | Endpoint         | Component | `AuthenticatedRoute`? |
