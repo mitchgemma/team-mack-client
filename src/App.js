@@ -12,7 +12,8 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
-import Favorites from './components/Favorites/IndexFavorites'
+import IndexFavorites from './components/Favorites/IndexFavorites'
+import ShowFavorite from './components/Favorites/ShowFavorite'
 
 const App = () => {
 
@@ -78,7 +79,14 @@ const App = () => {
 					path='/favorites'
 					element={
 						// <RequireAuth user={user}>
-							<Favorites msgAlert={msgAlert} user={user} />}
+							<IndexFavorites msgAlert={msgAlert} user={user} />}
+						// </RequireAuth>}
+				/>
+				<Route
+					path='/favorites/:id'
+					element={
+						// <RequireAuth user={user}>
+							<ShowFavorite msgAlert={msgAlert} user={user} />}
 						// </RequireAuth>}
 				/>
 			</Routes>

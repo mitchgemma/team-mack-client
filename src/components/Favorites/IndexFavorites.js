@@ -12,7 +12,7 @@ const cardContainerLayout = {
 
 const IndexFavorites = (props) => {
     const [favorites, setFavorites] = useState(null)
-    const { msgAlert } = props
+    const { user, msgAlert } = props
 
     useEffect(() => {
         getAllFavorites()
