@@ -14,9 +14,9 @@ const cardContainerLayout = {
 const ShowFavorite = (props) => {
 
     const [favorite, setFavorite] = useState(null)
-    const { user, msgAlert } = props
+    const {  msgAlert } = props
     const { id } = useParams()
-    console.log('id in showFavorite', id)
+    console.log('id in showFavorite', favorite)
 
     useEffect(() => {
         getOneFavorite(id)
@@ -49,25 +49,56 @@ const ShowFavorite = (props) => {
         )
     }
 
+  
 
-    return (
-      <>
-        <Container className="fluid">
-            <Card>
-                <Card.Header>{favorite.name}</Card.Header>
-                <Card.Body>
-                    {/* <Card.Text>
-                        <small>Age: {favorite.age}</small><br/>
-                        <small>Type: {favorite.type}</small><br/>
-                        <small>
-                            Adoptable: {favorite.adoptable ? 'yes' : 'no'}
-                        </small>
-                    </Card.Text> */}
-                </Card.Body>
-            </Card>
-        </Container>
-      </>
-    )
+        // if (favorite.venues) {
+            return (
+                <Container className="fluid">
+                    <Card>
+                        <Card.Header>{favorite.venues[0].name} <br/>
+                            <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
+                        </Card.Header>
+                        <Card.Body>
+                            <Card.Text>
+                                <small>{favorite.venues[0].url}</small><br/>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Container>
+            )
+        // } else if (favorite === 'performers') {
+        //     return (
+        //         <Container className="fluid">
+        //             <Card>
+        //                 <Card.Header>{favorite.performers[0].name} <br/>
+        //                     <small></small><br/>
+        //                 </Card.Header>
+        //                 <Card.Body>
+        //                     <Card.Text>
+        //                         <small></small><br/>
+        //                     </Card.Text>
+        //                 </Card.Body>
+        //             </Card>
+        //         </Container>
+        //     )
+        // } else if ( favorite.type === 'events' ) {
+        //     return (
+            
+        //         <Container className="fluid">
+        //             <Card>
+        //                 <Card.Header>{favorite.events[0].name} <br/>
+        //                     <small></small><br/>
+        //                 </Card.Header>
+        //                 <Card.Body>
+        //                     <Card.Text>
+        //                         <small></small><br/>
+        //                     </Card.Text>
+        //                 </Card.Body>
+        //             </Card>
+        //         </Container>
+        //     )
+    // }
+    
 }
 
 export default ShowFavorite

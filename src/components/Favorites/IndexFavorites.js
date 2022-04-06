@@ -15,7 +15,7 @@ const IndexFavorites = (props) => {
     const { user, msgAlert } = props
 
     useEffect(() => {
-        getAllFavorites()
+        getAllFavorites(user)
             .then(res => {
                 console.log('this is the favorite data', res.data)
                 setFavorites(res.data.favorites)
@@ -51,7 +51,7 @@ const IndexFavorites = (props) => {
                 <Card.Header>{favorite.fullTitle}</Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        <Link to={`/favorites/${favorite.id}`}>{favorite.name}</Link>
+                        <Link to={`/favorites/${favorite._id}`}>{favorite.name}</Link>
                     </Card.Text>
                 </Card.Body>
             </Card>
