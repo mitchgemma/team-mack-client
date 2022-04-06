@@ -49,60 +49,56 @@ const ShowFavorite = (props) => {
         )
     }
 
+  
 
-    if ( favorite.type === 'venues' ) {
-        return (
-            <>
-              <Container className="fluid">
-                  <Card>
-                      <Card.Header>{favorite.venues[0].name} <br/>
-                          <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
-                      </Card.Header>
-                      <Card.Body>
-                          <Card.Text>
-                              <small>{favorite.venues[0].url}</small><br/>
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Container>
-            </>
-          )
-    } else if ( favorite.type === 'performers' ) {
-        return (
-            <>
-              <Container className="fluid">
-                  <Card>
-                      <Card.Header>{favorite.performers[0].name} <br/>
-                          <small></small><br/>
-                      </Card.Header>
-                      <Card.Body>
-                          <Card.Text>
-                              <small></small><br/>
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Container>
-            </>
-          )
-    } else if ( favorite.type === 'events' ) {
-        return (
-            <>
-              <Container className="fluid">
-                  <Card>
-                      <Card.Header>{favorite.events[0].name} <br/>
-                          <small></small><br/>
-                      </Card.Header>
-                      <Card.Body>
-                          <Card.Text>
-                              <small></small><br/>
-                          </Card.Text>
-                      </Card.Body>
-                  </Card>
-              </Container>
-            </>
-        )
-    }
-
+        // if (favorite.venues) {
+            return (
+                <Container className="fluid">
+                    <Card>
+                        <Card.Header>{favorite.venues[0].name} <br/>
+                            <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
+                        </Card.Header>
+                        <Card.Body>
+                            <Card.Text>
+                                <small>{favorite.venues[0].url}</small><br/>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Container>
+            )
+        // } else if (favorite === 'performers') {
+        //     return (
+        //         <Container className="fluid">
+        //             <Card>
+        //                 <Card.Header>{favorite.performers[0].name} <br/>
+        //                     <small></small><br/>
+        //                 </Card.Header>
+        //                 <Card.Body>
+        //                     <Card.Text>
+        //                         <small></small><br/>
+        //                     </Card.Text>
+        //                 </Card.Body>
+        //             </Card>
+        //         </Container>
+        //     )
+        // } else if ( favorite.type === 'events' ) {
+        //     return (
+            
+        //         <Container className="fluid">
+        //             <Card>
+        //                 <Card.Header>{favorite.events[0].name} <br/>
+        //                     <small></small><br/>
+        //                 </Card.Header>
+        //                 <Card.Body>
+        //                     <Card.Text>
+        //                         <small></small><br/>
+        //                     </Card.Text>
+        //                 </Card.Body>
+        //             </Card>
+        //         </Container>
+        //     )
+    // }
+    
 }
 
 export default ShowFavorite
