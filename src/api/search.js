@@ -12,14 +12,14 @@ export const getAllSearch = (type, name) => {
 //     return axios (`${apiUrl}/search/${type}/${name}/${id}`)
 // }
 
-// // POST -> create function
-// export const createPet = (user, newPet) => {
-//     return axios({
-//         url:`${apiUrl}/pets`,
-//         method: 'POST',
-//         headers: {
-//             Authorization: `Token token=${user.token}`
-//         },
-//         data: {pet: newPet}
-//     })
-// }
+// POST -> create function
+export const createSearch = ( user, type, name) => {
+    return axios({
+        url:`${apiUrl}/search/${type}/${name}`,
+        method: 'POST',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        },
+        data: {type, name}
+    })
+}
