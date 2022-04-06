@@ -3,14 +3,14 @@ import axios from 'axios'
 
 
 // index function
-export const getAllSearch = () => {
+export const getAllSearch = (type, name) => {
     return axios(`${apiUrl}/search/${type}/${name}`)
 }
 
 // show function
-export const getOneSearch = () => {
-    return axios (`${apiUrl}/search/${type}/${name}/${id}`)
-}
+// export const getOneSearch = () => {
+//     return axios (`${apiUrl}/search/${type}/${name}/${id}`)
+// }
 
 // // POST -> create function
 // export const createPet = (user, newPet) => {

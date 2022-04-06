@@ -12,6 +12,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import GetSearch from './components/Search/GetSearch'
 
 const App = () => {
 
@@ -45,13 +46,17 @@ const App = () => {
 			<Header user={user} />
 			<Routes>
 				<Route path='/' element={
-					<RequireAuth user={user}>
+					<RequireAuth user={user} >
 						<Home msgAlert={msgAlert} user={user} />
 					</RequireAuth>
 						
 				} />
 				<Route
-					path='/sign-in/sign-up'
+					path='/search'
+					element={<GetSearch msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
 				/>
 				<Route
