@@ -3,13 +3,14 @@ import { Form, Button } from 'react-bootstrap';
 import { getAllSearch } from '../../api/search.js'
 import apiUrl from '../../apiConfig.js';
 import { useNavigate } from 'react-router-dom';
+import {getSearchSuccess, getSearchFailure} from '../shared/AutoDismissAlert/messages'
 // we need to render a form that allows the user to search (events, venues, performers)
 const GetSearch = (props) => {
     const {user, msgAlert} = props
     const navigate = useNavigate()
-// we want to set the state of search for both type and name   
-    const [ type, setType ] = useState(null)
-    const [ name, setName ] = useState(null)
+// we want to set state defined as search with type and name as ...
+  
+ const [search, setSearch] = useState({type: null, name: null})
     // we want to pass in the values we get from search forms
     
     // that we assigned to state and pass them in as parameters 
@@ -18,33 +19,12 @@ const GetSearch = (props) => {
     const handleChange = (e) => {
         e.persist()
 
-        setType(prevType => {
-            // I used let as they aren't a constant variable as they are changing
-            let type = e.target.type
-            let value = e.target.value
-            console.log('this is e.target.type', e.target.type)
-            // if(type === "events" && name === " "){
-            //     // value = true \\ I dont know actually what should be the value
-            // } else if (type === "venues" && name === " "){
-            //     // value = false
-            // }else if(type === "performers" && name === " ") {
-            //     value = parseInt(e.target.value)
-            // }
-            const updatedValue = { [type]: value }
-
-
-            console.log('prevType', prevType)
-            console.log('updatedValue', updatedValue)
-
-            return {...prevType, ...updatedValue}
-        })
-        
-        setName(prevName => {
+        setSearch(prevSearch => {
             // I used let as they aren't a constant variable as they are changing
             let name = e.target.name
             let value = e.target.value
-            console.log('this is e.target.name', e.target.type)
-           // console.log('this is e.target checked', e.target.checked)
+            console.log('this is e.target.name', e.target.name)
+            console.log('this is e.target.value', e.target.value)
             // if(type === "events" && name === " "){
             //     // value = true \\ I dont know actually what should be the value
             // } else if (type === "venues" && name === " "){
@@ -55,20 +35,19 @@ const GetSearch = (props) => {
             const updatedValue = { [name]: value }
 
 
-            console.log('prevName', prevName)
+            console.log('this is prevSearch' , prevSearch)
             console.log('updatedValue', updatedValue)
 
-            return {...prevType, ...updatedValue}
-        })
+            return {...prevSearch, ...updatedValue}
+    })
 
-
-    }
+}
     const handleSubmit = (e) => {
         // e === event
         e.preventDefault()
-        getAllSearch(type, )
+        getAllSearch(search.type, search.name )
         // if create is successful we shoudl navigate to the show page
-        .then(res => {navigate(`${apiUrl}/search/${type}/${name}`)})
+        .then(res => {navigate(`${apiUrl}/search/${search.type}/${search.name}`)})
            //then we send a success message
            .then(() =>
            msgAlert({
@@ -84,7 +63,7 @@ const GetSearch = (props) => {
                variant: 'danger',
            }))
 
-        console.log('this is the type', type)
+       // console.log('this is the type', type)
     }
 
     // want something to submit the form (getAllSearch)
@@ -93,15 +72,17 @@ const GetSearch = (props) => {
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId='type'>
                 <Form.Control
+                    name="type"
                     placeholder='events, performers, venues'
-                    value={type}
+                    value={search.type}
                     onChange={handleChange}
                 />
                 </Form.Group>
                 <Form.Group controlId='name'>
                 <Form.Control
+                    name="name"
                     placeholder='name of event, artist, or venue'
-                    value={name}
+                    value={search.name}
                     onChange={handleChange}
                 />
                 </Form.Group>
