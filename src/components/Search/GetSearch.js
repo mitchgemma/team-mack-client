@@ -5,6 +5,7 @@ import apiUrl from '../../apiConfig.js';
 import { Navigate } from 'react-router-dom';
 // we need to render a form that allows the user to search (events, venues, performers)
 const GetSearch = (props) => {
+    const {user, msgAlert} = props
 // we want to set the state of search for both type and name   
     const [ type, setType ] = useState(null)
     const [ name, setName ] = useState(null)
@@ -19,23 +20,41 @@ const GetSearch = (props) => {
         setType(prevType => {
             // I used let as they aren't a constant variable as they are changing
             let type = e.target.type
-            // let type = e.target.value.type
-            // let name = e.target.value.name
-            let name = e.target.name
             let value = e.target.value
             console.log('this is e.target.type', e.target.type)
-            console.log('this is e.target checked', e.target.checked)
-            if(type === "events" && name === " "){
-                // value = true \\ I dont know actually what should be the value
-            } else if (type === "venues" && name === " "){
-                // value = false
-            }else if(type === "performers" && name === " ") {
-                value = parseInt(e.target.value)
-            }
+            // if(type === "events" && name === " "){
+            //     // value = true \\ I dont know actually what should be the value
+            // } else if (type === "venues" && name === " "){
+            //     // value = false
+            // }else if(type === "performers" && name === " ") {
+            //     value = parseInt(e.target.value)
+            // }
             const updatedValue = { [type]: value }
 
 
             console.log('prevType', prevType)
+            console.log('updatedValue', updatedValue)
+
+            return {...prevType, ...updatedValue}
+        })
+        
+        setName(prevName => {
+            // I used let as they aren't a constant variable as they are changing
+            let name = e.target.name
+            let value = e.target.value
+            console.log('this is e.target.name', e.target.type)
+           // console.log('this is e.target checked', e.target.checked)
+            // if(type === "events" && name === " "){
+            //     // value = true \\ I dont know actually what should be the value
+            // } else if (type === "venues" && name === " "){
+            //     // value = false
+            // }else if(type === "performers" && name === " ") {
+            //     value = parseInt(e.target.value)
+            // }
+            const updatedValue = { [name]: value }
+
+
+            console.log('prevName', prevName)
             console.log('updatedValue', updatedValue)
 
             return {...prevType, ...updatedValue}
@@ -48,14 +67,23 @@ const GetSearch = (props) => {
         e.preventDefault()
         getAllSearch(type, )
         // if create is successful we shoudl navigate to the show page
-            .then(res => {console.log(res.data.type)})
-            // then we send a success message
-            .catch(error => console.log(error))
-            // if create is successful, we should navigate to the show page
-            .then(res => {navigate(`${apiUrl}/search/${type}/${name}`)})
-            // then we send a success message
-            
-        console.log('thsi is the type', type)
+        .then(res => {navigate(`${apiUrl}/search/${type}/${name}`)})
+           //then we send a success message
+           .then(() =>
+           msgAlert({
+               heading: 'Yay!',
+               message: getSearchSuccess,
+               variant: 'success',
+           }))
+       // if there is an error, we'll send an error message
+       .catch(() =>
+           msgAlert({
+               heading: 'Oh No!',
+               message: getSearchFailure,
+               variant: 'danger',
+           }))
+
+        console.log('this is the type', type)
     }
 
     // want something to submit the form (getAllSearch)
