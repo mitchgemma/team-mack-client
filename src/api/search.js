@@ -13,7 +13,7 @@ export const getAllSearch = (type, name) => {
 // }
 
 // POST -> create function
-export const createSearch = ( user, type, name) => {
+export const createSearch = ( type, name) => {
     return axios({
         url:`${apiUrl}/search/${type}/${name}`,
         method: 'POST',

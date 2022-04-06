@@ -4,7 +4,7 @@ import { getAllSearch } from '../../api/search.js'
 import apiUrl from '../../apiConfig.js';
 import { useNavigate } from 'react-router-dom';
 // we need to render a form that allows the user to search (events, venues, performers)
-const GetSearch = (props) => {
+const getSearch = (props) => {
     const {user, msgAlert} = props
 // we want to set the state of search for both type and name   
     const [ type, setType ] = useState(null)
@@ -113,13 +113,11 @@ const GetSearch = (props) => {
         <>
 
             <Form>
-                <Form.Group controlId='search'>
-                    <Form.Label>SRCH SMTHNG</Form.Label>
+                <Form.Group >
                     <Form.Control
-                        required
-                        type='events, venues, performers'
-                        placeholder='Search Here'
-                        handleChange={e => getAllSearch(e.target.value)}
+                        type={type}
+                        placeholder=''
+                        handleChange={handleChange}
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit" >
