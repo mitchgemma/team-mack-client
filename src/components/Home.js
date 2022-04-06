@@ -1,6 +1,7 @@
 import GetSearch from "./Search/GetSearch"
 
 
+
 const Home = (props) => {
 	// const { msgAlert, user } = props
 	console.log('props in home', props)

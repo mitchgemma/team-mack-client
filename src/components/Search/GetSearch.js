@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // we need to render a form that allows the user to search (events, venues, performers)
 const getSearch = (props) => {
     const {user, msgAlert} = props
+    const navigate = useNavigate()
 // we want to set the state of search for both type and name   
     const [ type, setType ] = useState(null)
     const [ name, setName ] = useState(null)
@@ -127,5 +128,4 @@ const getSearch = (props) => {
         </>
     )
 }
-
-export default GetSearch
+// export default GetSearch
