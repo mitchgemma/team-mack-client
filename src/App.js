@@ -12,6 +12,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import Favorites from './components/Favorites/IndexFavorites'
 
 const App = () => {
 
@@ -51,7 +52,7 @@ const App = () => {
 						
 				} />
 				<Route
-					path='/sign-in/sign-up'
+					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
 				/>
 				<Route
@@ -72,6 +73,13 @@ const App = () => {
 						<RequireAuth user={user}>
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
+				/>
+				<Route
+					path='/favorites'
+					element={
+						// <RequireAuth user={user}>
+							<Favorites msgAlert={msgAlert} user={user} />}
+						// </RequireAuth>}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (

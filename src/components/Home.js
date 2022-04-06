@@ -1,4 +1,5 @@
-import CreateSearch from "./Search/GetSearch"
+// import CreateSearch from "./Search/GetSearch"
+
 
 const Home = (props) => {
 	// const { msgAlert, user } = props
@@ -7,7 +8,6 @@ const Home = (props) => {
 	return (
 		<>
 			<h2>SEARCH SMTHNG</h2>
-
 		</>
 	)
 }

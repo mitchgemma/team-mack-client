@@ -13,5 +13,8 @@ code {
 }
 
 .logo {
-  font-family: 'Permanent Marker';
+  color: purple;
+  font-size: 2em;
+  margin-left: 1em;
+
 }

@@ -87,7 +87,7 @@ const SignIn = (props) => {
                 </Form>
                 {/* <Button>
                 </Button> */}
-                    <Link to='sign-up'>Sign Up</Link>
+                    <Link to='/sign-up'>Sign Up</Link>
 
             </div>
         </div>

@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from 'react-router-dom'
 
 
 const linkStyle = {
-    color: 'white',
-    textDecoration: 'none'
+	
+    color: 'purple',
+    textDecoration: 'none',
+
 }
 const authenticatedOptions = (
 	<>
@@ -48,7 +51,7 @@ const Header = ({ user }) => (
 	<Navbar bg='light' variant='dark' expand='md'>
 		<Navbar.Brand>
             <Link to='/' style={linkStyle} className='logo'>
-                SMTHG MSC
+                smthing msc
             </Link>
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -60,6 +63,11 @@ const Header = ({ user }) => (
 				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
+			<NavDropdown title="Check it" id="basic-nav-dropdown" style={linkStyle} >
+				<Link to='/favorites' style={linkStyle} className='logo'>
+					my picks
+            	</Link>
+			</NavDropdown>
 		</Navbar.Collapse>
 	</Navbar>
 )
