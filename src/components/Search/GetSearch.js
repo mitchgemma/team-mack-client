@@ -4,10 +4,11 @@ import { getAllSearch } from '../../api/search.js'
 import apiUrl from '../../apiConfig.js';
 import { useNavigate } from 'react-router-dom';
 // we need to render a form that allows the user to search (events, venues, performers)
-const GetSearch = () => {
-    // we want to set the state of search for both type and name   
-    const [type, setType] = useState(null)
-    const [name, setName] = useState(null)
+const GetSearch = (props) => {
+    const {user, msgAlert} = props
+// we want to set the state of search for both type and name   
+    const [ type, setType ] = useState(null)
+    const [ name, setName ] = useState(null)
     // we want to pass in the values we get from search forms
     // that we assigned to state and pass them in as parameters 
     // to getAllSearch
@@ -19,13 +20,14 @@ const GetSearch = () => {
         setType(prevType => {
             // I used let as they aren't a constant variable as they are changing
             let type = e.target.type
+            let value = e.target.value
             console.log('this is e.target.type', e.target.type)
-            // if(type === "events"){
-            //     value 
-            // } else if (type === "venues" ){
-            //     value 
-            // }else if(type === "performers" ) {
-            //     value 
+            // if(type === "events" && name === " "){
+            //     // value = true \\ I dont know actually what should be the value
+            // } else if (type === "venues" && name === " "){
+            //     // value = false
+            // }else if(type === "performers" && name === " ") {
+            //     value = parseInt(e.target.value)
             // }
             const updatedValue = { [type]: value }
 
@@ -57,22 +59,53 @@ const GetSearch = () => {
 
             return { ...prevType, ...updatedValue }
         })
+        
+        setName(prevName => {
+            // I used let as they aren't a constant variable as they are changing
+            let name = e.target.name
+            let value = e.target.value
+            console.log('this is e.target.name', e.target.type)
+           // console.log('this is e.target checked', e.target.checked)
+            // if(type === "events" && name === " "){
+            //     // value = true \\ I dont know actually what should be the value
+            // } else if (type === "venues" && name === " "){
+            //     // value = false
+            // }else if(type === "performers" && name === " ") {
+            //     value = parseInt(e.target.value)
+            // }
+            const updatedValue = { [name]: value }
+
+
+            console.log('prevName', prevName)
+            console.log('updatedValue', updatedValue)
+
+            return {...prevType, ...updatedValue}
+        })
 
 
     }
     const handleSubmit = (e) => {
         // e === event
         e.preventDefault()
-        getAllSearch(type,)
-            // if create is successful, we should navigate to the show page
-            .then(res => { navigate(`${apiUrl}/search/${type}/${name}`) })
-            // if create is successful we shoudl navigate to the show page
-            .then(res => { console.log(res.data.type) })
-            // then we send a success message
-            .catch(error => console.log(error))
-        // then we send a success message
+        getAllSearch(type, )
+        // if create is successful we shoudl navigate to the show page
+        .then(res => {navigate(`${apiUrl}/search/${type}/${name}`)})
+           //then we send a success message
+           .then(() =>
+           msgAlert({
+               heading: 'Yay!',
+               message: getSearchSuccess,
+               variant: 'success',
+           }))
+       // if there is an error, we'll send an error message
+       .catch(() =>
+           msgAlert({
+               heading: 'Oh No!',
+               message: getSearchFailure,
+               variant: 'danger',
+           }))
 
-        console.log('thsi is the type', type)
+        console.log('this is the type', type)
     }
 
     // want something to submit the form (getAllSearch)
