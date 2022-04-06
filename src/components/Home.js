@@ -1,4 +1,4 @@
-import GetSearch from "./Search/GetSearch"
+// import GetSearch from "./Search/GetSearch"
 
 
 
@@ -9,7 +9,7 @@ const Home = (props) => {
 	return (
 		<>
 			<h2>SEARCH SMTHNG</h2>
-			<GetSearch />
+			{/* <GetSearch /> */}
 		</>
 	)
 }

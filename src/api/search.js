@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import apiUrl from '../apiConfig'
 // import axios from 'axios'
 
@@ -36,3 +37,5 @@ export const createSearch = ( user, type, name) => {
         data: {type, name}
     })
 }
+=======
+>>>>>>> bba6e3abe37adc16a9cd810c01493d48f579799f
