@@ -6,7 +6,7 @@
 // search function will be a post route, not creating something like a pet,
 //but returning a req.body through its inputs that allows us to interpolate
 //in the api call URL
-export const creatSearch = (user, type, name) => {
+export const createSearch = (user, type, name) => {
     console.log('user', user)
     console.log('this is newPet', newPet)
     return axios({

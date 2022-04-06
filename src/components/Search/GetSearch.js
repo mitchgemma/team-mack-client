@@ -113,17 +113,24 @@ const getSearch = (props) => {
     return (
         <>
 
-            <Form>
-                <Form.Group >
-                    <Form.Control
-                        type={type}
-                        placeholder=''
-                        handleChange={handleChange}
-                    />
+<Form onSubmit={handleSubmit}>
+            <Form.Group controlId='type'>
+                <Form.Control
+                    placeholder='events, performers, venues'
+                    value={type}
+                    onChange={handleChange}
+                />
                 </Form.Group>
-                <Button variant="primary" type="submit" >
-                    SEARCH
-                </Button>
+                <Form.Group controlId='name'>
+                <Form.Control
+                    placeholder='name of event, artist, or venue'
+                    value={name}
+                    onChange={handleChange}
+                />
+                </Form.Group>
+            <Button variant="primary" type="submit" >
+                SEARCH
+            </Button>
             </Form>
         </>
     )
