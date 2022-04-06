@@ -14,6 +14,8 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import IndexFavorites from './components/Favorites/IndexFavorites'
 import ShowFavorite from './components/Favorites/ShowFavorite'
+import GetSearch from './components/Search/GetSearch'
+
 
 const App = () => {
 
@@ -47,11 +49,15 @@ const App = () => {
 			<Header user={user} />
 			<Routes>
 				<Route path='/' element={
-					<RequireAuth user={user}>
+					<RequireAuth user={user} >
 						<Home msgAlert={msgAlert} user={user} />
 					</RequireAuth>
 						
 				} />
+				<Route
+					path='/search'
+					element={<GetSearch msgAlert={msgAlert} user={user} />}
+				/>
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}

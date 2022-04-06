@@ -8,6 +8,8 @@ const messages = {
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
 	indexFavoritesSuccess: "Favorite picks retrieved successfully!",
 	indexFavoritesFailure: "Failed to get your favorite picks. Please try again.",
+	getSearchSuccess:'These are the results!',
+	getSearchFailure:"We couldn't find a match!"
 }
 
 module.exports = messages
