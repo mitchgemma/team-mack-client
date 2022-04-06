@@ -107,5 +107,4 @@ const GetSearch = (props) => {
         </>
     )
 }
-
-export default GetSearch
+// export default GetSearch
