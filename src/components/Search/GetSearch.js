@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { getAllSearch } from '../../api/search.js'
 import apiUrl from '../../apiConfig.js';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // we need to render a form that allows the user to search (events, venues, performers)
 const GetSearch = (props) => {
     const {user, msgAlert} = props
+    const navigate = useNavigate()
 // we want to set the state of search for both type and name   
     const [ type, setType ] = useState(null)
     const [ name, setName ] = useState(null)
@@ -89,20 +90,24 @@ const GetSearch = (props) => {
     // want something to submit the form (getAllSearch)
     return(
         <>
-        
-        <Form>
-        <Form.Group controlId='search'>
-                        <Form.Label>SRCH SMTHNG</Form.Label>
-                        <Form.Control
-                            required
-                            type='events, venues, performers'
-                            placeholder='Search Here'
-                            handleChange={e => getAllSearch(e.target.value)}
-                        />
-                        </Form.Group>
-        <Button variant="primary" type="submit" >
-            SEARCH
-        </Button>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId='type'>
+                <Form.Control
+                    placeholder='events, performers, venues'
+                    value={type}
+                    onChange={handleChange}
+                />
+                </Form.Group>
+                <Form.Group controlId='name'>
+                <Form.Control
+                    placeholder='name of event, artist, or venue'
+                    value={name}
+                    onChange={handleChange}
+                />
+                </Form.Group>
+            <Button variant="primary" type="submit" >
+                SEARCH
+            </Button>
         </Form>
         </>
     )
