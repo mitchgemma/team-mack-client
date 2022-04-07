@@ -90,16 +90,16 @@ const App = () => {
 				<Route
 					path='/favorites'
 					element={
-						// <RequireAuth user={user}>
+						<RequireAuth user={user}>
 							<IndexFavorites msgAlert={msgAlert} user={user} />}
-						// </RequireAuth>}
+						</RequireAuth>}
 				/>
 				<Route
 					path='/favorites/:id'
 					element={
-						// <RequireAuth user={user}>
+						<RequireAuth user={user}>
 							<ShowFavorite msgAlert={msgAlert} user={user} />}
-						// </RequireAuth>}
+						</RequireAuth>}
 				/>
 
 			</Routes>

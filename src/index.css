@@ -15,6 +15,6 @@ code {
 .logo {
   color: purple;
   font-size: 2em;
-  margin-left: 1em;
-
+  display: 'flex';
+  justify-content: 'center';
 }
