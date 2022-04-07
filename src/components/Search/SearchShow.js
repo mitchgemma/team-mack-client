@@ -1,58 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Spinner, Button, Container } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import { getOneSearch } from '../../api/search.js';
-import { showSearchSuccess, showSearchFailure } from '../shared/AutoDismissAlert/messages.js';
-const SearchShow = (props) => {
-    const [show, setShow] = useState(null)
-    const { id } = useParams()
-    const { user, msgAlert, searchResults } = props
-    console.log('params in searchShow', id)
-    useEffect(()=> {
-        getOneSearch(id)
-            .then(res =>{
-                setShow(res.data.show)
-                console.log('this is what res data is', res.data.show)
-            })
-            .then(()=> {
-                msgAlert({
-                    heading: 'Results has show!',
-                    message: showSearchSuccess,
-                    variant: 'success',
-                })
-            })
-            .catch(()=> {
-                msgAlert ({
-                    heading: 'Failure to show!',
-                    message: showSearchFailure,
-                    variant: 'danger',
-                })
-            })
-            .catch(console.error)
-    }, [id])
+import React, { useState } from 'react'
+import { Card, Button } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import apiUrl from '../../apiConfig.js';
+import { getOneSearch } from '../../api/search.js'
+import { useEffect } from 'react';
+import { showSearchFailure, showSearchSuccess } from '../shared/AutoDismissAlert/messages'
 
-    if (!show) {
-        return (
-            <Container fluid className="justify-content-center">
-                <Spinner animation="border" role="status" variant="info">
-                    <span className="visually-hidden">
-                        Loading....
-                    </span>
-                </Spinner>
-            </Container>
-        )
-    }
-    return(
-        <Card>
-        <Card.Header as="h5">{show.name}</Card.Header>
-        <Card.Body>
-          <Card.Title>{show.type}</Card.Title>
-          <Card.Text>
-            With supporting text below as a natural lead-in to additional content.
-          </Card.Text>
-          <Button variant="primary">Favorite This</Button>
-        </Card.Body>
-      </Card>
+const SearchShow = (props) => {
+    const { type, name, id } = useParams()
+    const { user, msgAlert, searchResults } = props
+    const [showResult, setShowResult] = useState({})
+
+    useEffect(() => {
+        getOneSearch(type, name, id)
+            .then(res => {
+                setShowResult(res.data.performers[0])
+                console.log('this is the res.data.performers[0].name', showResult)
+                console.log('this is the res.data.performers[0].name', res.data.performers[0].name)
+            })
+        // .catch(() => {
+        //     msgAlert({
+        //         heading: 'Oops!',
+        //         message: searchShowFailure,
+        //         variant: 'danger',
+        //     })
+        // })
+    }, [])
+    return (
+        <>
+            <Card style={{ width: '30%' }} className="m-2">
+
+                <Card.Header>
+                    {showResult.name}
+                </Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <Card.Img variant="bottom" src={showResult.image} />
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <Link style={{ textDecoration: "none" }}
+                to={`/search`}>
+                <Button>
+                    Back to search
+                </Button>
+            </Link>
+        </>
     )
-} 
+}
+
 export default SearchShow

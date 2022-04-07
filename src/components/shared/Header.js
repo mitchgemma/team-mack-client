@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom'
 
 const linkStyle = {
 	
-    color: 'purple',
+    color: 'black',
     textDecoration: 'none',
 
 }
 const authenticatedOptions = (
 	<>
-		<Nav.Item>
+		{/* <Nav.Item>
 			<Link to='change-password' style={linkStyle}>
 				Change Password
 			</Link>
@@ -22,52 +22,61 @@ const authenticatedOptions = (
 			<Link to='sign-out' style={linkStyle}>
 				Sign Out
 			</Link>
-		</Nav.Item>
+		</Nav.Item> */}
+		<NavDropdown title="/ / / / / / / /" id="basic-nav-dropdown" style={linkStyle} >
+			<Link to='/' style={linkStyle}>
+ 				Search
+			</Link> <br/>
+			<Link to='/favorites' style={linkStyle}>
+				My favorite picks 
+			</Link> <br/>
+			<Link to='change-password' style={linkStyle}>
+				Change Password
+			</Link><br/>
+			<Link to='sign-out' style={linkStyle}>
+				Sign Out
+			</Link><br/>
+		</NavDropdown>
 	</>
 )
 
 const unauthenticatedOptions = (
 	<>
         <Nav.Item>
-		    <Link to='sign-up' style={linkStyle}>Sign Up</Link>
+		    <Link to='sign-up' style={linkStyle} className='m-2'>Sign Up</Link>
         </Nav.Item>
         <Nav.Item>
-		    <Link to='sign-in' style={linkStyle}>Sign In</Link>
+		    <Link to='sign-in' style={linkStyle} className='m-2'>Sign In</Link>
         </Nav.Item>
 	</>
 )
 
-const alwaysOptions = (
-	<>
-		<Nav.Link>
-			<Link to='/' style={linkStyle}>
-				Home
-			</Link>
-		</Nav.Link>
-	</>
-)
+// const alwaysOptions = (
+// 	<>
+// 		<Nav.Link>
+// 			<Link to='/' style={linkStyle}>
+// 				Home
+// 			</Link>
+// 		</Nav.Link>
+// 	</>
+// )
 
 const Header = ({ user }) => (
 	<Navbar bg='light' variant='dark' expand='md'>
-		<Navbar.Brand>
-            <Link to='/' style={linkStyle} className='logo'>
-                smthing msc
-            </Link>
-        </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
+				<Navbar.Brand>
+					<Link to='/' style={linkStyle} className='logo' >
+						smthing msc
+					</Link>
+				</Navbar.Brand>
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto'>
-				{user && (
+				{/* {user && (
 					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
-				)}
-				{alwaysOptions}
-				{user ? authenticatedOptions : unauthenticatedOptions}
+				)} */}
+				{/* {alwaysOptions}	 */}
 			</Nav>
-			<NavDropdown title="Check it" id="basic-nav-dropdown" style={linkStyle} >
-				<Link to='/favorites' style={linkStyle} className='logo'>
-					my picks
-            	</Link>
-			</NavDropdown>
+				{user ? authenticatedOptions : unauthenticatedOptions}
 		</Navbar.Collapse>
 	</Navbar>
 )

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { getOneFavorite, removeFavorite } from '../../api/favorites'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
-import {showFavoriteSuccess, showFavoriteFailure} from '../shared/AutoDismissAlert/messages'
+import { showFavoriteSuccess, showFavoriteFailure } from '../shared/AutoDismissAlert/messages'
+import CommentForm from '../shared/CommentForm'
 
 const cardContainerLayout = {
     display: 'flex',
@@ -22,10 +23,10 @@ const ShowFavorite = (props) => {
         getOneFavorite(id)
             .then(res => {
                 setFavorite(res.data.favorite)
-                console.log ('this is the res data favorite', res.data.favorite)
-                console.log ('this is the res data ', res.data)
+                console.log('this is the res data favorite', res.data.favorite)
+                console.log('this is the res data ', res.data)
             }
-                )
+            )
             .then(() => {
                 msgAlert({
                     heading: 'Here is a favorite!',
@@ -62,7 +63,7 @@ const ShowFavorite = (props) => {
                     variant: 'success',
                 })
             })
-            .then(() => {navigate(`/favorites`)})
+            .then(() => { navigate(`/favorites`) })
             .catch(() => {
                 msgAlert({
                     heading: 'something went wrong',
@@ -79,73 +80,81 @@ const ShowFavorite = (props) => {
     // let eventDate = moment(favorite.events[0].datetime_local).format("YYYY/MM/DD")
 
     // renders VENUES //
-    if ( typeFav[0] === 'venues' ) {
+    if (typeFav[0] === 'venues') {
         return (
             <Container className="fluid">
                 <Card>
-                    <Card.Header>{favorite.venues[0].name} <br/>
-                        <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
+                    <Card.Header>{favorite.venues[0].name} <br />
+                        <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br />
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>
-                            <small>{favorite.venues[0].url}</small><br/>
+                            <small>{favorite.venues[0].url}</small><br />
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                        <Button onClick={() => removeTheFav()} className="m-2" variant="danger">
                             Remove the venue
                         </Button>
+
                     </Card.Footer>
                 </Card>
             </Container>
         )
 
-    // renders PERFORMERS //    
-    } else if ( typeFav[0] === 'performers' ) {
+        // renders PERFORMERS //    
+    } else if (typeFav[0] === 'performers') {
         return (
             <Container className="fluid">
                 <Card>
-                    <Card.Header>{favorite.performers[0].name} <br/>
-                        <small></small><br/>
+                    <Card.Header>{favorite.performers[0].name} <br />
+                        <small></small><br />
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>
-                            <img fluid className="justify-content-center" src={favorite.performers[0].image} alt={favorite.performers[0].name}/><br/>
-                            <small></small><br/>
+                            <img
+                                fluid className="justify-content-center"
+                                src={favorite.performers[0].image}
+                                alt={favorite.performers[0].name}
+                            /><br />
+                            <small></small><br />
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                        <Button onClick={() => removeTheFav()} className="m-2" variant="danger">
                             Remove the performer
                         </Button>
+                        <div>
+                            {/* <CommentForm /> */}
+                        </div>
                     </Card.Footer>
                 </Card>
             </Container>
         )
 
-    // renders EVENTS //
-    } else if ( typeFav[0] ===  'events' ) {
+        // renders EVENTS //
+    } else if (typeFav[0] === 'events') {
         return (
-        
+
             <Container className="fluid">
                 <Card>
-                    <Card.Header>{favorite.events[0].short_title} <br/>
-                        <small></small><br/>
+                    <Card.Header>{favorite.events[0].short_title} <br />
+                        <small></small><br />
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>
-                            <small> {favorite.events[0].datetime_local} </small><br/>
+                            <small> {favorite.events[0].datetime_local} </small><br />
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                        <Button onClick={() => removeTheFav()} className="m-2" variant="danger">
                             Remove the event
                         </Button>
                     </Card.Footer>
                 </Card>
             </Container>
         )
-    }   
+    }
 }
 
 export default ShowFavorite

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import SearchShow from './SearchShow'
 //import { getAllSearch } from '../../api/search.js'
-// import apiUrl from '../../apiConfig.js';
+import apiUrl from '../../apiConfig.js';
 //import { useNavigate } from 'react-router-dom';
 //import {getSearchSuccess, getSearchFailure} from '../shared/AutoDismissAlert/messages'
+import SearchShow from '../Search/SearchShow'
 
 
 const cardContainerLayout = {
@@ -31,9 +31,10 @@ const SearchIndex = (props) => {
         searchCards = searchResults.map(searchItem => (
             // one method of styling, usually reserved for a single style
             // we can use inline, just like in html
+
             <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
                 <Link style={{ textDecoration: "none" }}
-                    to={`/search/${searchItem.type}/${searchItem.name}/${searchItem.id}`}>
+                    to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
                     {searchItem.name}
                     <Card.Header>
                     </Card.Header>
@@ -44,15 +45,17 @@ const SearchIndex = (props) => {
                     </Card.Body>
                 </Link>
             </Card>
+
         ))
 
     }
-
     return (
-        <div style={cardContainerLayout}>
-            {searchCards}
-            <SearchShow searchResults={searchResults} search={search} />
-        </div>
+        <>
+            <div style={cardContainerLayout}>
+                {searchCards}
+            </div>
+            {/* <SearchShow searchResults={searchResults} search={search} /> */}
+        </>
     )
 }
 
