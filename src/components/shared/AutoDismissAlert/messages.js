@@ -9,7 +9,9 @@ const messages = {
 	indexFavoritesSuccess: "Favorite picks retrieved successfully!",
 	indexFavoritesFailure: "Failed to get your favorite picks. Please try again.",
 	getSearchSuccess:'These are the results!',
-	getSearchFailure:"We couldn't find a match!"
+	getSearchFailure:"We couldn't find a match!",
+	showSearchSuccess:'You can see the ID!',
+	showSearchFailure:"We couldn't find ID!"
 }
 
 module.exports = messages

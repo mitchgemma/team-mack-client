@@ -6,6 +6,10 @@ import axios from 'axios'
 export const getAllSearch = (type, name) => {
     return axios(`${apiUrl}/search/${type}/${name}`)
 }
+//show function
+export const getOneSearch = (type, name, id) => {
+    return axios(`${apiUrl}/search/${type}/${name}/${id}`)
+}
 
 // search function
 // search function will be a post route, not creating something like a pet,
@@ -23,10 +27,6 @@ export const getAllSearch = (type, name) => {
 //     })
 // }
 
-// show function
-// export const getOneSearch = () => {
-//     return axios (`${apiUrl}/search/${type}/${name}/${id}`)
-// }
 
 // // POST -> create function
 // export const createPet = (user, newPet) => {
