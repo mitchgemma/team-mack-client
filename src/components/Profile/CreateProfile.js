@@ -9,9 +9,10 @@ const CreateProfile = (props) => {
   const navigate = useNavigate()
 
   const [profile, setProfile] = useState({
-    name: '',
+    firstName: '',
     city: '',
     state: '',
+    zipcode: '',
     genres: [],
     openToNewMusic: false,
   })

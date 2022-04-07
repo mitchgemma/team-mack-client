@@ -16,6 +16,7 @@ import IndexFavorites from './components/Favorites/IndexFavorites'
 import ShowFavorite from './components/Favorites/ShowFavorite'
 import GetSearch from './components/Search/GetSearch'
 import CreateProfile from './components/Profile/CreateProfile'
+import ShowProfile from './components/Profile/ShowProfile'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -105,12 +106,16 @@ const App = () => {
         />
 
         <Route
-          path="/addProfile"
+          path="/addprofile"
           element={
             <RequireAuth user={user}>
               <CreateProfile msgAlert={msgAlert} user={user} />
             </RequireAuth>
           }
+        />
+        <Route
+          path="/user/:id"
+          element={<ShowProfile msgAlert={msgAlert} user={user} />}
         />
       </Routes>
       {msgAlerts.map((msgAlert) => (

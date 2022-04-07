@@ -14,3 +14,8 @@ export const createProfile = (user, newProfile) => {
     data: { profile: newProfile },
   })
 }
+
+// SHOW -> Show the profile
+export const getProfile = (profileId) => {
+  return axios(`${apiUrl}/user/${profileId}`)
+}
