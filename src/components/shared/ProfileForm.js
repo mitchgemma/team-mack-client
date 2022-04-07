@@ -11,42 +11,42 @@ const ProfileForm = (props) => {
         <Form.Label>Name</Form.Label>
         <Form.Control
           placeholder="what is your name?"
-          value={profile.firstName}
+          // value={profile.firstName}
           name="firstName"
           onChange={handleChange}
         />
         <Form.Label>City</Form.Label>
         <Form.Control
           placeholder="What city do you live in?"
-          value={profile.city}
+          // value={profile.city}
           name="city"
           onChange={handleChange}
         />
         <Form.Label>State</Form.Label>
         <Form.Control
           placeholder="What state do you live in?"
-          value={profile.state}
+          // value={profile.state}
           name="state"
           onChange={handleChange}
         />
         <Form.Label>Zipcode</Form.Label>
         <Form.Control
           placeholder="What is your zipcode?"
-          value={profile.zipcode}
+          // value={profile.zipcode}
           name="zipcode"
           onChange={handleChange}
         />
         <Form.Label>Favorite Genres</Form.Label>
         <Form.Control
           placeholder="What are your favorite music genres?"
-          value={profile.genres}
+          // value={profile.genres}
           name="genres"
           onChange={handleChange}
         />
         <Form.Check
           label="Are you open to recommendations?"
           name="openToNewMusic"
-          defaultChecked={profile.openToNewMusic}
+          // defaultChecked={profile.openToNewMusic}
           onChange={handleChange}
         />
         <Button type="submit">Submit</Button>

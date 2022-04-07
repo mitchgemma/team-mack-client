@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import {Modal} from 'react-bootstrap'
-import PetForm from '../shared/PetForm'
+import ProfileForm from '../shared/ProfileForm'
 
 const EditProfileModal = (props) => {
-    const { user, show, handleClose, updateProfile, msgAlert, triggerRefresh } = props
-    const [profile, setProfile] = useState(props.pet)
-
+    const { user, profile, show, handleClose, updateProfile, triggerRefresh } = props
+    const [editProfile, setEditProfile] = useState(props.profile)
+    const { _id } = profile
+    console.log('the id', _id)
+    
     const handleChange = (e) => {
     // e === event
     e.persist()
-    setProfile((prevProfile) => {
+    setEditProfile((prevProfile) => {
       const name = e.target.name
       let value = e.target.value
       console.log('etarget type', value)
@@ -34,10 +36,24 @@ const EditProfileModal = (props) => {
     // e === event
     e.preventDefault()
 
-    updateProfile(user, profile)
+    updateProfile(user, editProfile, _id)
             .then(() => handleClose())
             .then(() => triggerRefresh())
       
   }
-    
+     return (
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>
+                <ProfileForm 
+                    profile={profile}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    heading="Edit profile!"
+                />
+            </Modal.Body>
+        </Modal>
+    )
 }
+
+export default EditProfileModal

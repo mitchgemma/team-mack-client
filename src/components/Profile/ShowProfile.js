@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { getProfile } from '../../api/profile'
+import { getProfile, updateProfile } from '../../api/profile'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
+import EditProfileModal from './EditProfileModal'
 
 const cardContainerLayout = {
   display: 'flex',
@@ -11,8 +12,11 @@ const cardContainerLayout = {
 
 const ShowProfile = (props) => {
   const [profile, setProfile] = useState({})
+    const [modalOpen, setModalOpen] = useState(false)
+
   const { id } = useParams()
-  //   const [updated, setUpdated] = useState(false)
+  const { user } = props
+    const [updated, setUpdated] = useState(false)
 
   console.log('id in showPet', id)
 
@@ -21,7 +25,7 @@ const ShowProfile = (props) => {
       console.log('show response', res.data)
       setProfile(res.data)
     })
-  }, [])
+  }, [updated])
   console.log('profile in show', profile)
 
   return (
@@ -50,11 +54,19 @@ const ShowProfile = (props) => {
               className="m-2"
               variant="warning"
             >
-              Edit Pet
+              Edit Profile
             </Button>
           </Card.Footer>
         </Card>
       </Container>
+      <EditProfileModal
+        profile={profile}
+        show={modalOpen}
+        user={user}
+        triggerRefresh={() => setUpdated((prev) => !prev)}
+        updateProfile={updateProfile}
+        handleClose={() => setModalOpen(false)}
+      />
     </>
   )
 }
