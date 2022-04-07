@@ -61,7 +61,7 @@ const IndexFavorites = (props) => {
 
     return (
         <>
-        <h3>All my favite picks</h3>
+        <h3>All my favorite picks</h3>
         <div style={cardContainerLayout}>
             {favoriteCards}
         </div>

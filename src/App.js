@@ -15,6 +15,7 @@ import ChangePassword from './components/auth/ChangePassword'
 import IndexFavorites from './components/Favorites/IndexFavorites'
 import ShowFavorite from './components/Favorites/ShowFavorite'
 import GetSearch from './components/Search/GetSearch'
+import SearchShow from './components/Search/SearchShow'
 
 
 const App = () => {
@@ -81,20 +82,31 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
+
+							<Route
+								path='/search/:type/:name'
+								element={<GetSearch msgAlert={msgAlert} user={user} />}
+							/>
+
+<Route
+	path='/search/:type/:name/:id'
+	element={<SearchShow msgAlert={msgAlert} user={user} />}
+/>
 				<Route
 					path='/favorites'
 					element={
 						// <RequireAuth user={user}>
-							<IndexFavorites msgAlert={msgAlert} user={user} />}
+						<IndexFavorites msgAlert={msgAlert} user={user} />}
 						// </RequireAuth>}
 				/>
 				<Route
 					path='/favorites/:id'
 					element={
 						// <RequireAuth user={user}>
-							<ShowFavorite msgAlert={msgAlert} user={user} />}
+						<ShowFavorite msgAlert={msgAlert} user={user} />}
 						// </RequireAuth>}
 				/>
+
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert

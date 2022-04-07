@@ -24,9 +24,9 @@ export const getAllSearch = (type, name) => {
 // }
 
 // show function
-// export const getOneSearch = () => {
-//     return axios (`${apiUrl}/search/${type}/${name}/${id}`)
-// }
+export const getOneSearch = (type, name, id) => {
+    return axios (`${apiUrl}/search/${type}/${name}/${id}`)
+}
 
 // // POST -> create function
 // export const createPet = (user, newPet) => {
