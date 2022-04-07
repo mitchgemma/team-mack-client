@@ -15,106 +15,116 @@ import ChangePassword from './components/auth/ChangePassword'
 import IndexFavorites from './components/Favorites/IndexFavorites'
 import ShowFavorite from './components/Favorites/ShowFavorite'
 import GetSearch from './components/Search/GetSearch'
-
+import CreateProfile from './components/Profile/CreateProfile'
 
 const App = () => {
+  const [user, setUser] = useState(null)
+  const [msgAlerts, setMsgAlerts] = useState([])
 
-	const [user, setUser] = useState(null)
-	const [msgAlerts, setMsgAlerts] = useState([])
+  console.log('user in app', user)
+  console.log('message alerts', msgAlerts)
+  const clearUser = () => {
+    console.log('clear user ran')
+    setUser(null)
+  }
 
-	console.log('user in app', user)
-	console.log('message alerts', msgAlerts)
-	const clearUser = () => {
-		console.log('clear user ran')
-		setUser(null)
-	}
+  const deleteAlert = (id) => {
+    setMsgAlerts((prevState) => {
+      return prevState.filter((msg) => msg.id !== id)
+    })
+  }
 
-	const deleteAlert = (id) => {
-		setMsgAlerts((prevState) => {
-			return (prevState.filter((msg) => msg.id !== id))
-		})
-	}
+  const msgAlert = ({ heading, message, variant }) => {
+    const id = uuid()
+    setMsgAlerts(() => {
+      return [{ heading, message, variant, id }]
+    })
+  }
 
-	const msgAlert = ({ heading, message, variant }) => {
-		const id = uuid()
-		setMsgAlerts(() => {
-			return (
-				[{ heading, message, variant, id }]
-			)
-		})
-	}
-
-	return (
-		<Fragment>
-			<Header user={user} />
-			<Routes>
-				<Route path='/' element={
-					<RequireAuth user={user} >
-						<Home msgAlert={msgAlert} user={user} />
-					</RequireAuth>
-						
-				} />
-				{/* <Route
+  return (
+    <Fragment>
+      <Header user={user} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RequireAuth user={user}>
+              <Home msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+        {/* <Route
 					path='/search'
 					element={<GetSearch msgAlert={msgAlert} user={user} />}
 				/> */}
-				<Route
-					path='/sign-up'
-					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path='/sign-in'
-					element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path='/sign-out'
-					element={
-						<RequireAuth user={user}>
-							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path='/change-password'
-					element={
-						<RequireAuth user={user}>
-							<ChangePassword msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
+        <Route
+          path="/sign-up"
+          element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
+        />
+        <Route
+          path="/sign-in"
+          element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+        />
+        <Route
+          path="/sign-out"
+          element={
+            <RequireAuth user={user}>
+              <SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/change-password"
+          element={
+            <RequireAuth user={user}>
+              <ChangePassword msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
 
-							<Route
-								path='/search/:type/:name'
-								element={<GetSearch msgAlert={msgAlert} user={user} />}
-							/>
+        <Route
+          path="/search/:type/:name"
+          element={<GetSearch msgAlert={msgAlert} user={user} />}
+        />
 
-				<Route
-					path='/favorites'
-					element={
-						<RequireAuth user={user}>
-							<IndexFavorites msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
-				<Route
-					path='/favorites/:id'
-					element={
-						<RequireAuth user={user}>
-							<ShowFavorite msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
+        <Route
+          path="/favorites"
+          element={
+            <RequireAuth user={user}>
+              <IndexFavorites msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/favorites/:id"
+          element={
+            <RequireAuth user={user}>
+              <ShowFavorite msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
 
-			</Routes>
-			{msgAlerts.map((msgAlert) => (
-				<AutoDismissAlert
-					key={msgAlert.id}
-					heading={msgAlert.heading}
-					variant={msgAlert.variant}
-					message={msgAlert.message}
-					id={msgAlert.id}
-					deleteAlert={deleteAlert}
-				/>
-			))}
-		</Fragment>
-	)
+        <Route
+          path="/addProfile"
+          element={
+            <RequireAuth user={user}>
+              <CreateProfile msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+      </Routes>
+      {msgAlerts.map((msgAlert) => (
+        <AutoDismissAlert
+          key={msgAlert.id}
+          heading={msgAlert.heading}
+          variant={msgAlert.variant}
+          message={msgAlert.message}
+          id={msgAlert.id}
+          deleteAlert={deleteAlert}
+        />
+      ))}
+    </Fragment>
+  )
 }
 
 export default App

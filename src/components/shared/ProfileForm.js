@@ -26,8 +26,21 @@ const ProfileForm = (props) => {
         <Form.Control
           placeholder="What state do you live in?"
           value={profile.state}
-          type="number"
-          name="age"
+          name="state"
+          onChange={handleChange}
+        />
+        <Form.Label>Zipcode</Form.Label>
+        <Form.Control
+          placeholder="What is your zipcode?"
+          value={profile.zipcode}
+          name="zipcode"
+          onChange={handleChange}
+        />
+        <Form.Label>Favorite Genres</Form.Label>
+        <Form.Control
+          placeholder="What are your favorite music genres?"
+          value={profile.genres}
+          name="genres"
           onChange={handleChange}
         />
         <Form.Check
