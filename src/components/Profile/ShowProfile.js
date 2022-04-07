@@ -10,7 +10,7 @@ const cardContainerLayout = {
 }
 
 const ShowProfile = (props) => {
-  const [profile, setProfile] = useState(null)
+  const [profile, setProfile] = useState({})
   const { id } = useParams()
   //   const [updated, setUpdated] = useState(false)
 
@@ -28,16 +28,20 @@ const ShowProfile = (props) => {
     <>
       <Container className="fluid">
         <Card>
-          <Card.Header>{profile}</Card.Header>
+          <Card.Header>{profile.firstName}</Card.Header>
           <Card.Body>
             <Card.Text>
-              {/* <small>Age: {pet.age}</small>
+              <small>City: {profile.city}</small>
               <br />
-              <small>Type: {pet.type}</small>
+              <small>State: {profile.state}</small>
+              <br />
+              <small>Zipcode: {profile.zipcode}</small>
+              <br />
+              <small>Favorite Genres: {profile.genres}</small>
               <br />
               <small>
-                Open to recommendations: {pet.adoptable ? 'yes' : 'no'}
-              </small> */}
+                Open to recommendations: {profile.openToNewMusic ? 'yes' : 'no'}
+              </small>
             </Card.Text>
           </Card.Body>
         </Card>
