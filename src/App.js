@@ -15,8 +15,8 @@ import ChangePassword from './components/auth/ChangePassword'
 import IndexFavorites from './components/Favorites/IndexFavorites'
 import ShowFavorite from './components/Favorites/ShowFavorite'
 import GetSearch from './components/Search/GetSearch'
+import IndexComments from './components/Comments/IndexComments'
 import SearchShow from './components/Search/SearchShow'
-
 
 
 const App = () => {
@@ -83,6 +83,7 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
+
 				<Route
 					path='/search/:type/:name'
 					element={<GetSearch msgAlert={msgAlert} user={user}/>}
@@ -102,6 +103,14 @@ const App = () => {
 					element={
 						<RequireAuth user={user}>
 							<ShowFavorite msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+				/>
+
+				<Route
+					path='/favorites/:id'
+					element={
+						<RequireAuth user={user}>
+							<IndexComments user={user} />
 						</RequireAuth>}
 				/>
 			</Routes>

@@ -7,8 +7,8 @@ export const postComment = (user, id, newComment) => {
     console.log('user', user)
     console.log('this is newPet', newNewComment)
     return axios({
-        url: `${apiUrl}/favorites/${id}`,
+        url: `${apiUrl}/comments`,
         method: 'POST',
-        data: { toy: newComment }
+        data: { comment: newComment }
     })
 }
