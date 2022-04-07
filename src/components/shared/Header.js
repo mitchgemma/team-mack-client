@@ -64,6 +64,11 @@ const unauthenticatedOptions = (
 const Header = ({ user }) => (
 	<Navbar bg='light' variant='dark' expand='md'>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
+				<Navbar.Brand>
+					<Link to='/' style={linkStyle} className='logo' >
+						smthing msc
+					</Link>
+				</Navbar.Brand>
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto'>
 				{/* {user && (
@@ -73,11 +78,6 @@ const Header = ({ user }) => (
 			</Nav>
 				{user ? authenticatedOptions : unauthenticatedOptions}
 		</Navbar.Collapse>
-		<Navbar.Brand>
-            <Link to='/' style={linkStyle} className='logo'>
-                smthing msc
-            </Link>
-        </Navbar.Brand>
 	</Navbar>
 )
 

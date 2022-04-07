@@ -3,6 +3,7 @@ import { getOneFavorite, removeFavorite } from '../../api/favorites'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
 import {showFavoriteSuccess, showFavoriteFailure} from '../shared/AutoDismissAlert/messages'
+import CommentForm from '../shared/CommentForm'
 
 const cardContainerLayout = {
     display: 'flex',
@@ -95,6 +96,7 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the venue
                         </Button>
+                       
                     </Card.Footer>
                 </Card>
             </Container>
@@ -118,6 +120,9 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the performer
                         </Button>
+                        <div>
+                            {/* <CommentForm /> */}
+                        </div>
                     </Card.Footer>
                 </Card>
             </Container>
