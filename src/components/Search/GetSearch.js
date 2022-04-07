@@ -13,6 +13,7 @@ const GetSearch = (props) => {
 // we want to set state defined as search with type and name as ...
   
  const [search, setSearch] = useState({type: null, name: null})
+ 
  const [searchResults, setSearchResults] = useState(null)
     // we want to pass in the values we get from search forms
     
@@ -48,9 +49,10 @@ const GetSearch = (props) => {
 
     const handleSubmit = (e) => {
         // e === event
+      
 
         e.preventDefault()
-        getAllSearch(search.type, search.name )
+        getAllSearch(search.type, search.name)
         // if create is successful we shoudl navigate to the show page
         .then(res => {
             setSearchResults(res.data.performers)
@@ -63,19 +65,19 @@ const GetSearch = (props) => {
        //console.log(search.type)
         // {navigate(`${apiUrl}/search/${search.type}/${search.name}`)}
            //then we send a success message
-           .then(() =>
-           msgAlert({
-               heading: 'Yay!',
-               message: getSearchSuccess,
-               variant: 'success',
-           }))
-       // if there is an error, we'll send an error message
-       .catch(() =>
-           msgAlert({
-               heading: 'Oh No!',
-               message: getSearchFailure,
-               variant: 'danger',
-           }))
+    //        .then(() =>
+    //        msgAlert({
+    //            heading: 'Yay!',
+    //            message: getSearchSuccess,
+    //            variant: 'success',
+    //        }))
+    //    // if there is an error, we'll send an error message
+    //    .catch(() =>
+    //        msgAlert({
+    //            heading: 'Oh No!',
+    //            message: getSearchFailure,
+    //            variant: 'danger',
+    //        }))
 
        // console.log('this is the type', type)
     }
@@ -104,7 +106,7 @@ const GetSearch = (props) => {
                 SEARCH
             </Button>
         </Form>
-        <SearchIndex searchResults={searchResults}/>
+        <SearchIndex searchResults={searchResults} search={search}/>
         </>
     )
 }
