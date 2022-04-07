@@ -1,23 +1,12 @@
-import { postComment } from '../../api/comments'
 import React, { useState } from 'react'
 import EditCommentModal from './EditCommentModal'
+import { Card, Button } from 'react-bootstrap'
 
 const ShowComments = (props) => {
-    const { comment, favorite, user, triggerRefresh, msgAlert } = props
-    const [comment, setComment] = useState({text: null, seatGeekId: null})
-    // console.log('id in showFavorite', comment)
+    const { favorite, user, triggerRefresh, msgAlert, comment } = props
+    console.log('id in showFavorite', comment)
 
     const [showEditModal, setShowEditModal] = useState(false)
-
-    const handleSubmit = (e) => {
-        // e === event
-        e.preventDefault()
-        postComment(user)
-        // if create is successful, navigate to the show page
-        .then(res => {
-            setComment(res.data.comment)
-            console.log(comment)    
-        })
     
     const removeComment = () => {
         removeComment(user, favorite._id, comment._id)
@@ -71,6 +60,5 @@ const ShowComments = (props) => {
             />
         </>
         )
-    }
 }
 export default ShowComments

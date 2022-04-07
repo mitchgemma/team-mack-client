@@ -4,16 +4,12 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
 import {showFavoriteSuccess, showFavoriteFailure} from '../shared/AutoDismissAlert/messages'
 import CommentForm from '../shared/CommentForm'
+import IndexComments from '../Comments/IndexComments'
 
-const cardContainerLayout = {
-    display: 'flex',
-    justifyContent: 'center',
-    flexFlow: 'row wrap'
-}
 
 const ShowFavorite = (props) => {
-    const [favorite, setFavorite] = useState(null)
-    const { user, msgAlert, comment } = props
+    const [favorite, setFavorite] = useState()
+    const { user, msgAlert } = props
     const { id } = useParams()
     const navigate = useNavigate()
     // console.log('id in showFavorite', favorite)
@@ -98,6 +94,7 @@ const ShowFavorite = (props) => {
                        
                     </Card.Footer>
                 </Card>
+                <IndexComments msgAlert={msgAlert} user={user}/>  
             </Container>
         )
 
@@ -119,15 +116,17 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the performer
                         </Button>
-                        <div>
+                        {/* <div>
                         <CommentForm 
-                            user={user}
-                            favorite={favorite}
-                            comment={comment}
+                            // user={user}
+                            // favorite={favorite}
+                            // comment={comment}
+                            // handleSubmit={handleSubmit}
                         />
-                        </div>
+                        </div> */}
                     </Card.Footer>
                 </Card>
+                <IndexComments msgAlert={msgAlert} user={user}/>  
             </Container>
         )
 
@@ -151,11 +150,9 @@ const ShowFavorite = (props) => {
                         </Button>
                     </Card.Footer>
                 </Card>
-            </Container>
-
-            
-        )
-        
+                <IndexComments msgAlert={msgAlert} user={user}/>       
+            </Container>   
+        )    
     }
 }
 
