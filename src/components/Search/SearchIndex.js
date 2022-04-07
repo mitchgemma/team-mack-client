@@ -6,7 +6,7 @@ import apiUrl from '../../apiConfig.js';
 //import {getSearchSuccess, getSearchFailure} from '../shared/AutoDismissAlert/messages'
 
 const SearchIndex = (props) => {
-
+//testing
     const {searchResults} = props
     
     if (searchResults === null){
