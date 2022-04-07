@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { getOneFavorite } from '../../api/favorites'
+import { getOneFavorite, removeFavorite } from '../../api/favorites'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
 import {showFavoriteSuccess, showFavoriteFailure} from '../shared/AutoDismissAlert/messages'
 
@@ -14,9 +13,10 @@ const cardContainerLayout = {
 const ShowFavorite = (props) => {
 
     const [favorite, setFavorite] = useState(null)
-    const {  msgAlert } = props
+    const { user, msgAlert } = props
     const { id } = useParams()
-    console.log('id in showFavorite', favorite)
+    const navigate = useNavigate()
+    // console.log('id in showFavorite', favorite)
 
     useEffect(() => {
         getOneFavorite(id)
@@ -49,56 +49,97 @@ const ShowFavorite = (props) => {
         )
     }
 
-  
+    // function to remove the favorite at click
+    const removeTheFav = () => {
+        removeFavorite(user, id)
+            .then(() => {
+                msgAlert({
+                    heading: 'your pick was removed from your favorites',
+                    message: 'theyre gone',
+                    variant: 'success',
+                })
+            })
+            .then(() => {navigate(`/favorites`)})
+            .catch(() => {
+                msgAlert({
+                    heading: 'something went wrong',
+                    message: 'that aint it',
+                    variant: 'danger',
+                })
+            })
+    }
 
-        // if (favorite.venues) {
-            return (
-                <Container className="fluid">
-                    <Card>
-                        <Card.Header>{favorite.venues[0].name} <br/>
-                            <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Text>
-                                <small>{favorite.venues[0].url}</small><br/>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Container>
-            )
-        // } else if (favorite === 'performers') {
-        //     return (
-        //         <Container className="fluid">
-        //             <Card>
-        //                 <Card.Header>{favorite.performers[0].name} <br/>
-        //                     <small></small><br/>
-        //                 </Card.Header>
-        //                 <Card.Body>
-        //                     <Card.Text>
-        //                         <small></small><br/>
-        //                     </Card.Text>
-        //                 </Card.Body>
-        //             </Card>
-        //         </Container>
-        //     )
-        // } else if ( favorite.type === 'events' ) {
-        //     return (
-            
-        //         <Container className="fluid">
-        //             <Card>
-        //                 <Card.Header>{favorite.events[0].name} <br/>
-        //                     <small></small><br/>
-        //                 </Card.Header>
-        //                 <Card.Body>
-        //                     <Card.Text>
-        //                         <small></small><br/>
-        //                     </Card.Text>
-        //                 </Card.Body>
-        //             </Card>
-        //         </Container>
-        //     )
-    // }
-    
+    // takes the object key and make it into a sting.
+    let typeFav = Object.keys(favorite)
+    // console.log ( 'this is the string', typeFav)
+
+    // renders VENUES //
+    if ( typeFav[0] === 'venues' ) {
+        return (
+            <Container className="fluid">
+                <Card>
+                    <Card.Header>{favorite.venues[0].name} <br/>
+                        <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <small>{favorite.venues[0].url}</small><br/>
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                            Remove the performer!
+                        </Button>
+                    </Card.Footer>
+                </Card>
+            </Container>
+        )
+
+    // renders PERFORMERS //    
+    } else if ( typeFav[0] === 'performers' ) {
+        return (
+            <Container className="fluid">
+                <Card>
+                    <Card.Header>{favorite.performers[0].name} <br/>
+                        <small></small><br/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <small></small><br/>
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                            Remove the performer!
+                        </Button>
+                    </Card.Footer>
+                </Card>
+            </Container>
+        )
+
+    // renders EVENTS //
+    } else if ( typeFav[0] ===  'events' ) {
+        return (
+        
+            <Container className="fluid">
+                <Card>
+                    <Card.Header>{favorite.events[0].short_title} <br/>
+                        <small></small><br/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <small></small><br/>
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                            Remove the performer!
+                        </Button>
+                    </Card.Footer>
+                </Card>
+            </Container>
+        )
+    }   
 }
 
 export default ShowFavorite
