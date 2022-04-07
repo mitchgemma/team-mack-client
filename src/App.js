@@ -13,6 +13,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import GetSearch from './components/Search/GetSearch'
+import SearchShow from './components/Search/SearchShow'
 
 
 const App = () => {
@@ -79,11 +80,15 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
-							<Route
-								path='/search/:type/:name'
-								element={<GetSearch msgAlert={msgAlert} user={user}/>}
-							
-							/>
+				<Route
+					path='/search/:type/:name'
+					element={<GetSearch msgAlert={msgAlert} user={user}/>}
+				
+				/>
+				<Route
+					path='/search/:type/:name/:id'
+					element={<SearchShow msgAlert={msgAlert} user={user}/>}
+				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert

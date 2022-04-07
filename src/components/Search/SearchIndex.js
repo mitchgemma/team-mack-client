@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+    import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 //import { getAllSearch } from '../../api/search.js'
@@ -34,7 +34,7 @@ const SearchIndex = (props) => {
             
             <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
                 <Link style={{ textDecoration: "none" }}
-                    to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
+                    to={`/search/${searchItem.type}/${searchItem.name}/${searchItem.id}`}>
                     {searchItem.name}
                     <Card.Header>
 
@@ -53,9 +53,9 @@ const SearchIndex = (props) => {
     return(
         <>
         <div style={cardContainerLayout}>
-            {searchCards}
+            {searchCards}   
         </div>
-        <SearchShow searchResults={searchResults} search={search} />
+        {/* <SearchShow searchResults={searchResults} search={search} /> */}
         </>
     )
 }

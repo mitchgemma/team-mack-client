@@ -14,7 +14,11 @@ const SearchShow = (props) => {
     
     useEffect(() => {
         getOneSearch(id)
-        .then(res => setShowResult(res.data.performers))
+        .then(res => {
+        setShowResult(res.data)
+        
+        }
+        )
         // .catch(() => {
         //     msgAlert({
         //         heading: 'Oops!',
