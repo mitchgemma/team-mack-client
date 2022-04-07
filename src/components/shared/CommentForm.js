@@ -11,8 +11,14 @@ const CommentForm = (props) => {
                 <Form.Label>Submit your comments!</Form.Label>
                 <Form.Control 
                     placeholder="enter your thoughts on the performer, event or venue here..."
-                    value={comment.text}
+                    type='text'
                     name='comment'
+                    value={comment.text}
+                />
+                <Form.Control 
+                    type='hidden'
+                    name='seatGeekId'
+                    value={comment.seatGeekId}
                 />
                 <Button type='submit'>Submit</Button>
             </Form>

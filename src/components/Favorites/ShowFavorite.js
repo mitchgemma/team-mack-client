@@ -12,12 +12,11 @@ const cardContainerLayout = {
 }
 
 const ShowFavorite = (props) => {
-
     const [favorite, setFavorite] = useState(null)
     const { user, msgAlert } = props
     const { id } = useParams()
     const navigate = useNavigate()
-    console.log('id in showFavorite', favorite)
+    // console.log('id in showFavorite', favorite)
 
     useEffect(() => {
         getOneFavorite(id)
@@ -125,7 +124,7 @@ const ShowFavorite = (props) => {
                             Remove the performer
                         </Button>
                         <div>
-                            {/* <CommentForm /> */}
+                            <IndexComments />
                         </div>
                     </Card.Footer>
                 </Card>
@@ -152,6 +151,19 @@ const ShowFavorite = (props) => {
                         </Button>
                     </Card.Footer>
                 </Card>
+            </Container>,
+
+            <Container className="justify-content-center">
+            <h3>{heading}</h3>
+            <Form onSubmit={handleSubmit}>
+                <Form.Label>Submit your comments!</Form.Label>
+                <Form.Control 
+                    placeholder="enter your thoughts on the performer, event or venue here..."
+                    value={comment.text}
+                    name='comment'
+                />
+                <Button type='submit'>Submit</Button>
+            </Form>
             </Container>
         )
     }
