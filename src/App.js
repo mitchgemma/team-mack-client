@@ -12,8 +12,11 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import IndexFavorites from './components/Favorites/IndexFavorites'
+import ShowFavorite from './components/Favorites/ShowFavorite'
 import GetSearch from './components/Search/GetSearch'
 import SearchShow from './components/Search/SearchShow'
+
 
 
 const App = () => {
