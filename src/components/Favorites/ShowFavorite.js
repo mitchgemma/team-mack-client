@@ -16,13 +16,16 @@ const ShowFavorite = (props) => {
     const { user, msgAlert } = props
     const { id } = useParams()
     const navigate = useNavigate()
-    // console.log('id in showFavorite', favorite)
+    console.log('id in showFavorite', favorite)
 
     useEffect(() => {
         getOneFavorite(id)
-            .then(res => setFavorite(res.data.favorite))
-            // console.log ('this is the res data favorite', res.data.favorite)
-            // console.log ('this is the res data ', res.data)
+            .then(res => {
+                setFavorite(res.data.favorite)
+                console.log ('this is the res data favorite', res.data.favorite)
+                console.log ('this is the res data ', res.data)
+            }
+                )
             .then(() => {
                 msgAlert({
                     heading: 'Here is a favorite!',
@@ -73,6 +76,8 @@ const ShowFavorite = (props) => {
     let typeFav = Object.keys(favorite)
     // console.log ( 'this is the string', typeFav)
 
+    // let eventDate = moment(favorite.events[0].datetime_local).format("YYYY/MM/DD")
+
     // renders VENUES //
     if ( typeFav[0] === 'venues' ) {
         return (
@@ -88,7 +93,7 @@ const ShowFavorite = (props) => {
                     </Card.Body>
                     <Card.Footer>
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
-                            Remove the performer!
+                            Remove the venue
                         </Button>
                     </Card.Footer>
                 </Card>
@@ -105,12 +110,13 @@ const ShowFavorite = (props) => {
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>
+                            <img fluid className="justify-content-center" src={favorite.performers[0].image} alt={favorite.performers[0].name}/><br/>
                             <small></small><br/>
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
-                            Remove the performer!
+                            Remove the performer
                         </Button>
                     </Card.Footer>
                 </Card>
@@ -128,12 +134,12 @@ const ShowFavorite = (props) => {
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>
-                            <small></small><br/>
+                            <small> {favorite.events[0].datetime_local} </small><br/>
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
-                            Remove the performer!
+                            Remove the event
                         </Button>
                     </Card.Footer>
                 </Card>
