@@ -78,10 +78,11 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
-							<Route
+							{/* <Route
 								path='/search/:type/:name'
-								element={<GetSearch msgAlert={msgAlert} user={user} />}
-							/>
+								element={<SearchIndex msgAlert={msgAlert} user={user}/>}
+							
+							/> */}
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert
