@@ -6,6 +6,8 @@ import ProfileForm from '../shared/ProfileForm'
 const CreateProfile = (props) => {
   const { user, msgAlert } = props
   console.log('user in create', user)
+  const navigate = useNavigate()
+
   const [profile, setProfile] = useState({
     name: '',
     city: '',
@@ -39,11 +41,23 @@ const CreateProfile = (props) => {
     })
   }
 
+  const handleSubmit = (e) => {
+    // e === event
+    e.preventDefault()
+
+    createProfile(user, profile)
+      // if create is successful, we should navigate to the show page
+      .then((res) => {
+        // NEED TO CREATE SHOW PAGE
+        navigate(`/user/${res.data.profile.id}`)
+      })
+  }
+
   return (
     <ProfileForm
       profile={profile}
       handleChange={handleChange}
-      //   handleSubmit={handleSubmit}
+      handleSubmit={handleSubmit}
       heading="Create a new Profile!"
     />
   )

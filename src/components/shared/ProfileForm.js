@@ -11,8 +11,8 @@ const ProfileForm = (props) => {
         <Form.Label>Name</Form.Label>
         <Form.Control
           placeholder="what is your name?"
-          value={profile.name}
-          name="name"
+          value={profile.firstName}
+          name="firstName"
           onChange={handleChange}
         />
         <Form.Label>City</Form.Label>
