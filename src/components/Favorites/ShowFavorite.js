@@ -13,7 +13,7 @@ const cardContainerLayout = {
 
 const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
-    const { user, msgAlert, comments } = props
+    const { user, msgAlert, comment } = props
     const { id } = useParams()
     const navigate = useNavigate()
     // console.log('id in showFavorite', favorite)
@@ -122,8 +122,8 @@ const ShowFavorite = (props) => {
                         <div>
                         <CommentForm 
                             user={user}
+                            favorite={favorite}
                             comment={comment}
-                            // handleSubmit={handleSubmit}
                         />
                         </div>
                     </Card.Footer>

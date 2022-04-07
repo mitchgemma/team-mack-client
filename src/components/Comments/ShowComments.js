@@ -60,6 +60,15 @@ const ShowComments = (props) => {
                     }
                 </Card.Body>
             </Card>
+            <EditCommentModal
+                user={user}
+                favorite={favorite}
+                comment={comment}
+                show={showEditModal}
+                handleClose={() => setShowEditModal(false)}
+                msgAlert={msgAlert}
+                triggerRefresh={triggerRefresh}
+            />
         </>
         )
     }
