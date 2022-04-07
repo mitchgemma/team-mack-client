@@ -1,4 +1,4 @@
-    import React, { useState } from 'react'
+import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 //import { getAllSearch } from '../../api/search.js'
@@ -14,30 +14,29 @@ const cardContainerLayout = {
     flexFlow: 'row wrap'
 }
 const SearchIndex = (props) => {
-//testing
-    const {searchResults, search} = props
+    //testing
+    const { searchResults, search } = props
     //const { type, name } = props.search
     let searchCards
-    if (searchResults === null){
-        return(
+    if (searchResults === null) {
+        return (
             <>
-            <h3>Please search for something</h3>
+                <h3>Please search for something</h3>
             </>
-    )
-}
+        )
+    }
 
 
     else {
         searchCards = searchResults.map(searchItem => (
             // one method of styling, usually reserved for a single style
             // we can use inline, just like in html
-            
+
             <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
                 <Link style={{ textDecoration: "none" }}
-                    to={`/search/${searchItem.type}/${searchItem.name}/${searchItem.id}`}>
+                    to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
                     {searchItem.name}
                     <Card.Header>
-
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>
@@ -46,16 +45,16 @@ const SearchIndex = (props) => {
                     </Card.Body>
                 </Link>
             </Card>
-            
+
         ))
-    
+
     }
-    return(
+    return (
         <>
-        <div style={cardContainerLayout}>
-            {searchCards}   
-        </div>
-        {/* <SearchShow searchResults={searchResults} search={search} /> */}
+            <div style={cardContainerLayout}>
+                {searchCards}
+            </div>
+            {/* <SearchShow searchResults={searchResults} search={search} /> */}
         </>
     )
 }

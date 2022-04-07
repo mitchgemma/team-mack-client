@@ -54,12 +54,12 @@ const App = () => {
 					<RequireAuth user={user} >
 						<Home msgAlert={msgAlert} user={user} />
 					</RequireAuth>
-						
+
 				} />
-				{/* <Route
+				<Route
 					path='/search'
 					element={<GetSearch msgAlert={msgAlert} user={user} />}
-				/> */}
+				/>
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
@@ -86,12 +86,13 @@ const App = () => {
 
 				<Route
 					path='/search/:type/:name'
-					element={<GetSearch msgAlert={msgAlert} user={user}/>}
+					element={<GetSearch msgAlert={msgAlert} user={user} />}
 				/>
 				<Route
 					path='/search/:type/:name/:id'
-					element={<SearchShow msgAlert={msgAlert} user={user}/>}
-
+					element={<SearchShow msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
 					path='/favorites'
 					element={
 						<RequireAuth user={user}>

@@ -8,7 +8,7 @@ export const getAllSearch = (type, name) => {
 }
 //show function
 export const getOneSearch = (type, name, id) => {
-    return axios (`${apiUrl}/search/${type}/${name}/${id}`)
+    return axios(`${apiUrl}/search/${type}/${name}/${id}`)
 }
 
 // search function
