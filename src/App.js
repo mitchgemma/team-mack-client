@@ -52,7 +52,7 @@ const App = () => {
 					<RequireAuth user={user} >
 						<Home msgAlert={msgAlert} user={user} />
 					</RequireAuth>
-						
+						    
 				} />
 				<Route
 					path='/search'

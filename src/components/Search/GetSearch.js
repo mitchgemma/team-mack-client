@@ -1,29 +1,30 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { getAllSearch } from '../../api/search.js'
-import { createSearch } from '../../api/search.js';
 import apiUrl from '../../apiConfig.js';
 import { useNavigate } from 'react-router-dom';
+import {getSearchSuccess, getSearchFailure} from '../shared/AutoDismissAlert/messages'
 // we need to render a form that allows the user to search (events, venues, performers)
-const getSearch = (props) => {
+const GetSearch = (props) => {
     const {user, msgAlert} = props
     const navigate = useNavigate()
-// we want to set the state of search for both type and name   
-
+// we want to set state defined as search with type and name as ...
+  
+ const [search, setSearch] = useState({type: null, name: null})
     // we want to pass in the values we get from search forms
-    const [ search, setSearch] = useState({type: '', name: ''})
+    
     // that we assigned to state and pass them in as parameters 
     // to getAllSearch
-
     // then have something that handles the change (handleChange function)
     const handleChange = (e) => {
         e.persist()
 
         setSearch(prevSearch => {
             // I used let as they aren't a constant variable as they are changing
-            let type = e.target.name
+            let name = e.target.name
             let value = e.target.value
-            console.log('this is e.target.type', e.target.type)
+            console.log('this is e.target.name', e.target.name)
+            console.log('this is e.target.value', e.target.value)
             // if(type === "events" && name === " "){
             //     // value = true \\ I dont know actually what should be the value
             // } else if (type === "venues" && name === " "){
@@ -31,24 +32,22 @@ const getSearch = (props) => {
             // }else if(type === "performers" && name === " ") {
             //     value = parseInt(e.target.value)
             // }
-            const updatedValue = { [type]: value }
+            const updatedValue = { [name]: value }
 
 
-            console.log('prevType', prevSearch)
+            console.log('this is prevSearch' , prevSearch)
             console.log('updatedValue', updatedValue)
 
-            return { ...prevType, ...updatedValue }
-        })
-    
-      
+            return {...prevSearch, ...updatedValue}
+    })
 
-    }
+}
     const handleSubmit = (e) => {
         // e === event
         e.preventDefault()
         getAllSearch(search.type, search.name )
         // if create is successful we shoudl navigate to the show page
-        .then(res => {navigate(`${apiUrl}/search/${type}/${name}`)})
+        .then(res => {navigate(`${apiUrl}/search/${search.type}/${search.name}`)})
            //then we send a success message
            .then(() =>
            msgAlert({
@@ -64,35 +63,35 @@ const getSearch = (props) => {
                variant: 'danger',
            }))
 
-        console.log('this is the type', type)
+       // console.log('this is the type', type)
     }
 
     // want something to submit the form (getAllSearch)
-    return (
+    return(
         <>
-
-<Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <Form.Group controlId='type'>
                 <Form.Control
+                    name='type'
                     placeholder='events, performers, venues'
-                    name={search.type}
                     value={search.type}
                     onChange={handleChange}
                 />
                 </Form.Group>
                 <Form.Group controlId='name'>
                 <Form.Control
+                    name='name'
                     placeholder='name of event, artist, or venue'
                     value={search.name}
-                    name={search.name}
                     onChange={handleChange}
                 />
                 </Form.Group>
             <Button variant="primary" type="submit" >
                 SEARCH
             </Button>
-            </Form>
+        </Form>
         </>
     )
 }
+
 export default GetSearch
