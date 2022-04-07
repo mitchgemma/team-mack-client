@@ -2,8 +2,8 @@ import { Form, Container, Button } from 'react-bootstrap'
 
 const CommentForm = (props) => {
     
-    const { comment, handleSubmit } = props
-
+    const { comment, handleChange, handleSubmit } = props
+    
     return (
         <Container className="justify-content-center">
             <Form onSubmit={handleSubmit}>
@@ -13,12 +13,8 @@ const CommentForm = (props) => {
                     type='text'
                     name='comment'
                     value={comment.text}
+                    onChange={handleChange}
                 />
-                {/* <Form.Control 
-                    type='hidden'
-                    name='seatGeekId'
-                    value={comment}
-                /> */}
                 <Button type='submit'>Submit</Button>
             </Form>
         </Container>

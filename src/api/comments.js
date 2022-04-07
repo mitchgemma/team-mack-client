@@ -2,10 +2,16 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 
+// INDEX -> all Comments
+export const getAllComments = (user) => {
+    return axios({url: `${apiUrl}/comments`})
+}
+
+
 // POST -> create function
 export const postComment = (user, favoriteId, newComment) => {
     console.log('user', user)
-    console.log('this is newPet', newComment)
+    console.log('this is new Comment', newComment)
     return axios({
         url: `${apiUrl}/comments/${favoriteId}`,
         method: 'POST',
