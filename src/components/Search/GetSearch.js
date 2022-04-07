@@ -4,6 +4,8 @@ import { getAllSearch } from '../../api/search.js'
 import apiUrl from '../../apiConfig.js';
 import { useNavigate } from 'react-router-dom';
 import {getSearchSuccess, getSearchFailure} from '../shared/AutoDismissAlert/messages'
+import SearchIndex from '../Search/SearchIndex'
+
 // we need to render a form that allows the user to search (events, venues, performers)
 const GetSearch = (props) => {
     const {user, msgAlert} = props
@@ -11,6 +13,8 @@ const GetSearch = (props) => {
 // we want to set state defined as search with type and name as ...
   
  const [search, setSearch] = useState({type: null, name: null})
+ 
+ const [searchResults, setSearchResults] = useState(null)
     // we want to pass in the values we get from search forms
     
     // that we assigned to state and pass them in as parameters 
@@ -42,26 +46,38 @@ const GetSearch = (props) => {
     })
 
 }
+
     const handleSubmit = (e) => {
         // e === event
+      
+
         e.preventDefault()
-        getAllSearch(search.type, search.name )
+        getAllSearch(search.type, search.name)
         // if create is successful we shoudl navigate to the show page
-        .then(res => {navigate(`${apiUrl}/search/${search.type}/${search.name}`)})
+        .then(res => {
+            setSearchResults(res.data.performers)
+            console.log(searchResults)    
+            //navigate(`/search/${search.type}/${search.name}`
+            
+       // )
+        })
+        // console.log(res.data.search)
+       //console.log(search.type)
+        // {navigate(`${apiUrl}/search/${search.type}/${search.name}`)}
            //then we send a success message
-           .then(() =>
-           msgAlert({
-               heading: 'Yay!',
-               message: getSearchSuccess,
-               variant: 'success',
-           }))
-       // if there is an error, we'll send an error message
-       .catch(() =>
-           msgAlert({
-               heading: 'Oh No!',
-               message: getSearchFailure,
-               variant: 'danger',
-           }))
+    //        .then(() =>
+    //        msgAlert({
+    //            heading: 'Yay!',
+    //            message: getSearchSuccess,
+    //            variant: 'success',
+    //        }))
+    //    // if there is an error, we'll send an error message
+    //    .catch(() =>
+    //        msgAlert({
+    //            heading: 'Oh No!',
+    //            message: getSearchFailure,
+    //            variant: 'danger',
+    //        }))
 
        // console.log('this is the type', type)
     }
@@ -90,6 +106,7 @@ const GetSearch = (props) => {
                 SEARCH
             </Button>
         </Form>
+        <SearchIndex searchResults={searchResults} search={search}/>
         </>
     )
 }
