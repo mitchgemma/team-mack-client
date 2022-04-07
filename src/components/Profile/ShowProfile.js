@@ -44,6 +44,15 @@ const ShowProfile = (props) => {
               </small>
             </Card.Text>
           </Card.Body>
+          <Card.Footer>
+            <Button
+              onClick={() => setModalOpen(true)}
+              className="m-2"
+              variant="warning"
+            >
+              Edit Pet
+            </Button>
+          </Card.Footer>
         </Card>
       </Container>
     </>
