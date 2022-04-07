@@ -106,7 +106,6 @@ const App = () => {
 							<ShowFavorite msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
-
 				<Route
 					path='/favorites/:id'
 					element={
