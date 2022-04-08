@@ -25,13 +25,7 @@ const ShowFavorite = (props) => {
                 console.log ('this is the res data ', res.data)
             }
                 )
-            .then(() => {
-                msgAlert({
-                    heading: 'Here is a favorite!',
-                    message: showFavoriteSuccess,
-                    variant: 'success',
-                })
-            })
+            
             .catch(() => {
                 msgAlert({
                     heading: 'No favorite found',
@@ -43,7 +37,7 @@ const ShowFavorite = (props) => {
     
     // function to remove the favorite at click
     const removeTheFav = () => {
-        removeFavorite(user, favorite.id)
+        removeFavorite(user,id)
             .then(() => {
                 msgAlert({
                     heading: 'your pick was removed from your favorites',
@@ -169,7 +163,6 @@ const ShowFavorite = (props) => {
                         </Button>
                     </Card.Footer>
                 </Card>
-                {/* <IndexComments msgAlert={msgAlert} user={user}/>        */}
             </Container>   
         )    
     }
