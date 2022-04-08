@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { postComment } from '../../api/comments'
 import {Modal} from 'react-bootstrap'
 import CommentForm from '../shared/CommentForm'
+import { useNavigate } from 'react-router-dom'
 
 const CreateComment = (props) => {
     const {user, favorite, handleClose, msgAlert, show } = props
-
+    const navigate = useNavigate()
     const [comment, setComment] = useState({})
     console.log('comment in create', comment)
 
@@ -34,7 +35,7 @@ const CreateComment = (props) => {
         console.log('the comment to submit', comment)
         postComment(user, favorite.id, comment)
             // if create is successful, we should navigate to the show page
-            .then(() => handleClose())
+            .then(res => {navigate(`/favorites/${res.data.favorites.id}`)})
 
             .then(() =>
                 msgAlert({

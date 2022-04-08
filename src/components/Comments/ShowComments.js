@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 // import EditCommentModal from './EditCommentModal'
 import { Card, Button } from 'react-bootstrap'
+import CreateComment from './CreateComment'
 
 const ShowComments = (props) => {
     const { comment, favorite, user, triggerRefresh, msgAlert } = props
     console.log('id in showFavorite', comment)
 
-    // const [showEditModal, setShowEditModal] = useState(false)
+    const [showEditModal, setShowEditModal] = useState(false)
     
     const removeComment = () => {
         removeComment(user, favorite._id, comment._id)
@@ -49,7 +50,7 @@ const ShowComments = (props) => {
                     }
                 </Card.Body>
             </Card>
-            {/* <EditCommentModal
+            <CreateComment
                 user={user}
                 favorite={favorite}
                 comment={comment}
@@ -57,7 +58,7 @@ const ShowComments = (props) => {
                 handleClose={() => setShowEditModal(false)}
                 msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
-            /> */}
+            />
         </>
         )
 }
