@@ -3,17 +3,20 @@ import { getOneFavorite, removeFavorite } from '../../api/favorites'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
 import {showFavoriteSuccess, showFavoriteFailure} from '../shared/AutoDismissAlert/messages'
-import CommentForm from '../shared/CommentForm'
-import IndexComments from '../Comments/IndexComments'
+import ShowComments from '../Comments/ShowComments'
+import CreateComment from '../Comments/CreateComment'
 
 
 const ShowFavorite = (props) => {
-    const [favorite, setFavorite] = useState()
+    const [favorite, setFavorite] = useState(null)
+    const [commentModalOpen, setCommentModalOpen] = useState(false)
     const { user, msgAlert } = props
     const { id } = useParams()
     const navigate = useNavigate()
     // console.log('id in showFavorite', favorite)
+    console.log('id in props', props)
 
+    
     useEffect(() => {
         getOneFavorite(id)
             .then(res => {
@@ -37,20 +40,10 @@ const ShowFavorite = (props) => {
                 })
             })
     }, [])
-
-    if (!favorite) {
-        return (
-            <Container fluid className="justify-content-center">
-                <Spinner animation="border" role="status" variant="warning" >
-                    <span className="visually-hidden">Loading....</span>
-                </Spinner>
-            </Container>
-        )
-    }
-
+    
     // function to remove the favorite at click
     const removeTheFav = () => {
-        removeFavorite(user, id)
+        removeFavorite(user, favorite.id)
             .then(() => {
                 msgAlert({
                     heading: 'your pick was removed from your favorites',
@@ -67,6 +60,32 @@ const ShowFavorite = (props) => {
                 })
             })
     }
+
+    let commentCards
+    if (favorite) {
+        console.log('this is the favorite', favorite)
+        if (favorite.comments) {
+            commentCards = favorite.comments.map(comment => (
+                // need to pass all props needed for updateToy func in edit modal
+                <ShowComments
+                    key={comment._id} comment={comment} favorite={favorite} 
+                    user={user} msgAlert={msgAlert}
+                    // triggerRefresh={() => setUpdated(prev => !prev)}
+                />
+            ))
+        }
+    }
+
+    if (!favorite) {
+        return (
+            <Container fluid className="justify-content-center">
+                <Spinner animation="border" role="status" variant="warning" >
+                    <span className="visually-hidden">Loading....</span>
+                </Spinner>
+            </Container>
+        )
+    }
+
 
     // takes the object key and make it into a sting.
     let typeFav = Object.keys(favorite)
@@ -90,11 +109,9 @@ const ShowFavorite = (props) => {
                     <Card.Footer>
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the venue
-                        </Button>
-                       
+                        </Button> 
                     </Card.Footer>
                 </Card>
-                <IndexComments msgAlert={msgAlert} user={user}/>  
             </Container>
         )
 
@@ -116,17 +133,19 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the performer
                         </Button>
-                        {/* <div>
-                        <CommentForm 
-                            // user={user}
-                            // favorite={favorite}
-                            // comment={comment}
-                            // handleSubmit={handleSubmit}
+                        <Button onClick={() => setCommentModalOpen(true)} className="m-2" variant="info">
+                            Leave a comment
+                        </Button>
+                        <CreateComment
+                            favorite={favorite}
+                            show={commentModalOpen}
+                            user={user}
+                            msgAlert={msgAlert}
+                            // triggerRefresh={() => setUpdated(prev => !prev)}
+                            handleClose={() => setCommentModalOpen(false)}
                         />
-                        </div> */}
                     </Card.Footer>
                 </Card>
-                <IndexComments msgAlert={msgAlert} user={user}/>  
             </Container>
         )
 
@@ -150,7 +169,7 @@ const ShowFavorite = (props) => {
                         </Button>
                     </Card.Footer>
                 </Card>
-                <IndexComments msgAlert={msgAlert} user={user}/>       
+                {/* <IndexComments msgAlert={msgAlert} user={user}/>        */}
             </Container>   
         )    
     }

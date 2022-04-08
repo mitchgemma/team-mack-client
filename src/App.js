@@ -53,10 +53,10 @@ const App = () => {
 					</RequireAuth>
 						
 				} />
-				{/* <Route
+				<Route
 					path='/search'
 					element={<GetSearch msgAlert={msgAlert} user={user} />}
-				/> */}
+				/>
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}

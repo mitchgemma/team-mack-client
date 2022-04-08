@@ -45,8 +45,7 @@ const IndexFavorites = (props) => {
     if (favorites.length > 0) {
 
         favoriteCards = favorites.map(favorite => (
-            // one method of styling, usually reserved for a single style
-            // we can use inline, just like in html
+            
             <Card key={favorite.id} style={{ width: '30%' }} className="m-2" >
                 <Card.Header>{favorite.fullTitle}</Card.Header>
                 <Card.Body>

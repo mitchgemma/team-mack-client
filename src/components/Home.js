@@ -8,8 +8,8 @@ const Home = (props) => {
 
 	return (
 		<>
-			<h2>SEARCH SMTHNG</h2>
-			{/* <GetSearch /> */}
+			<h2 className="logo">SEARCH SMTHNG</h2>
+			
 		</>
 	)
 }

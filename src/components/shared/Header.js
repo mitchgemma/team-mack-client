@@ -9,6 +9,7 @@ const linkStyle = {
 	
     color: 'black',
     textDecoration: 'none',
+	fontFamily: 'Shadows Into Light'
 
 }
 const authenticatedOptions = (
@@ -24,7 +25,7 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Item> */}
 		<NavDropdown title="/ / / / / / / /" id="basic-nav-dropdown" style={linkStyle} >
-			<Link to='/' style={linkStyle}>
+			<Link to='/search' style={linkStyle}>
  				Search
 			</Link> <br/>
 			<Link to='/favorites' style={linkStyle}>
@@ -65,8 +66,8 @@ const Header = ({ user }) => (
 	<Navbar bg='light' variant='dark' expand='md'>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Brand>
-					<Link to='/' style={linkStyle} className='logo' >
-						smthing msc
+					<Link to='/search' style={linkStyle} className='logo' >
+						smthing mscl
 					</Link>
 				</Navbar.Brand>
 		<Navbar.Collapse id='basic-navbar-nav'>

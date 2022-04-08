@@ -11,7 +11,7 @@ const cardContainerLayout = {
 }
 
 const IndexComments = (props) => {
-    const [comments, setComments] = useState(null)
+    const [comments, setComments] = useState({text:''})
     const { msgAlert } = props
 
     useEffect(() => {
@@ -40,11 +40,8 @@ const IndexComments = (props) => {
     }
 
     let commentCards
-
     if (comments.length > 0) {
- 
         commentCards = comments.map(comment => (
-
             <Card key={comment.id} style={{ width: '30%' }} className="m-2" >
                 {/* <Card.Header></Card.Header> */}
                 <Card.Body>
