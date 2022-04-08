@@ -3,18 +3,16 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from 'react-router-dom'
-
+import ShowProfile from '../Profile/ShowProfile'
 
 const linkStyle = {
-	
     color: 'black',
     textDecoration: 'none',
 	fontFamily: 'Shadows Into Light'
-
 }
 const authenticatedOptions = (
-	<>
-		{/* <Nav.Item>
+  <>
+    {/* <Nav.Item>
 			<Link to='change-password' style={linkStyle}>
 				Change Password
 			</Link>
@@ -24,6 +22,7 @@ const authenticatedOptions = (
 				Sign Out
 			</Link>
 		</Nav.Item> */}
+  
 		<NavDropdown title="/ / / / / / / /" id="basic-nav-dropdown" style={linkStyle} >
 			<Link to='/search' style={linkStyle}>
  				Search
@@ -37,19 +36,27 @@ const authenticatedOptions = (
 			<Link to='sign-out' style={linkStyle}>
 				Sign Out
 			</Link><br/>
+          <Link to="addprofile" style={linkStyle}>
+        Profile
+      </Link>
+      <br />
 		</NavDropdown>
 	</>
 )
 
 const unauthenticatedOptions = (
-	<>
-        <Nav.Item>
-		    <Link to='sign-up' style={linkStyle} className='m-2'>Sign Up</Link>
-        </Nav.Item>
-        <Nav.Item>
-		    <Link to='sign-in' style={linkStyle} className='m-2'>Sign In</Link>
-        </Nav.Item>
-	</>
+  <>
+    <Nav.Item>
+      <Link to="sign-up" style={linkStyle} className="m-2">
+        Sign Up
+      </Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Link to="sign-in" style={linkStyle} className="m-2">
+        Sign In
+      </Link>
+    </Nav.Item>
+  </>
 )
 
 // const alwaysOptions = (
@@ -75,11 +82,11 @@ const Header = ({ user }) => (
 				{/* {user && (
 					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
 				)} */}
-				{/* {alwaysOptions}	 */}
-			</Nav>
-				{user ? authenticatedOptions : unauthenticatedOptions}
-		</Navbar.Collapse>
-	</Navbar>
+        {/* {alwaysOptions}	 */}
+      </Nav>
+      {user ? authenticatedOptions : unauthenticatedOptions}
+    </Navbar.Collapse>
+  </Navbar>
 )
 
 export default Header
