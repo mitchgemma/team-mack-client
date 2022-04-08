@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-import { Form, Container, Button } from 'react-bootstrap'
-import { createComment } from '../../api/comment'
-import { useNavigate } from 'react-router-dom'
+import { postComment } from '../../api/comments'
+import {Modal} from 'react-bootstrap'
 import CommentForm from '../shared/CommentForm'
 
 const CreateComment = (props) => {
-    const {user, msgAlert} = props
-    console.log('user in create', user)
-    const navigate = useNavigate()
-    
-    const [comment, setComment] = useState({text: ''})
+    const {user, favorite, handleClose, msgAlert, show } = props
+
+    const [comment, setComment] = useState({})
     console.log('comment in create', comment)
 
     const handleChange = (e) => {
@@ -34,9 +31,10 @@ const CreateComment = (props) => {
         // e === event
         e.preventDefault()
 
-        createComment(user, comment)
+        console.log('the comment to submit', comment)
+        postComment(user, favorite.id, comment)
             // if create is successful, we should navigate to the show page
-            .then(res => {navigate(`/comments/${res.data.favorite.id}`)})
+            .then(() => handleClose())
 
             .then(() =>
                 msgAlert({
@@ -53,14 +51,19 @@ const CreateComment = (props) => {
                 }))
         console.log('this is the comment', comment)
     }
-
+    console.log('this is show', show)
     return (
-        <CommentForm 
-            comment={comment}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            heading="Add new comment!"
-        />
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>
+                <CommentForm
+                    comment={comment}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    heading="Leave a comment!"
+                />
+            </Modal.Body>
+        </Modal>
     )
 }
 

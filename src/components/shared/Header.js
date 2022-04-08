@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom'
 import ShowProfile from '../Profile/ShowProfile'
 
 const linkStyle = {
-  color: 'black',
-  textDecoration: 'none',
+    color: 'black',
+    textDecoration: 'none',
+	fontFamily: 'Shadows Into Light'
 }
 const authenticatedOptions = (
   <>
@@ -21,33 +22,26 @@ const authenticatedOptions = (
 				Sign Out
 			</Link>
 		</Nav.Item> */}
-    <NavDropdown
-      title="/ / / / / / / /"
-      id="basic-nav-dropdown"
-      style={linkStyle}
-    >
-      <Link to="/" style={linkStyle}>
-        Search
-      </Link>{' '}
-      <br />
-      <Link to="/favorites" style={linkStyle}>
-        My favorite picks
-      </Link>{' '}
-      <br />
-      <Link to="change-password" style={linkStyle}>
-        Change Password
-      </Link>
-      <br />
-      <Link to="sign-out" style={linkStyle}>
-        Sign Out
-      </Link>
-      <br />
-      <Link to="addprofile" style={linkStyle}>
+  
+		<NavDropdown title="/ / / / / / / /" id="basic-nav-dropdown" style={linkStyle} >
+			<Link to='/search' style={linkStyle}>
+ 				Search
+			</Link> <br/>
+			<Link to='/favorites' style={linkStyle}>
+				My favorite picks 
+			</Link> <br/>
+			<Link to='change-password' style={linkStyle}>
+				Change Password
+			</Link><br/>
+			<Link to='sign-out' style={linkStyle}>
+				Sign Out
+			</Link><br/>
+          <Link to="addprofile" style={linkStyle}>
         Profile
       </Link>
       <br />
-    </NavDropdown>
-  </>
+		</NavDropdown>
+	</>
 )
 
 const unauthenticatedOptions = (
@@ -76,16 +70,16 @@ const unauthenticatedOptions = (
 // )
 
 const Header = ({ user }) => (
-  <Navbar bg="light" variant="dark" expand="md">
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Brand>
-      <Link to="/" style={linkStyle} className="logo">
-        smthing msc
-      </Link>
-    </Navbar.Brand>
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
-        {/* {user && (
+	<Navbar bg='light' variant='dark' expand='md'>
+		<Navbar.Toggle aria-controls='basic-navbar-nav' />
+				<Navbar.Brand>
+					<Link to='/search' style={linkStyle} className='logo' >
+						smthing mscl
+					</Link>
+				</Navbar.Brand>
+		<Navbar.Collapse id='basic-navbar-nav'>
+			<Nav className='ml-auto'>
+				{/* {user && (
 					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
 				)} */}
         {/* {alwaysOptions}	 */}

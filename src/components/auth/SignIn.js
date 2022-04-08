@@ -42,7 +42,7 @@ const SignIn = (props) => {
                     variant: 'success',
                 })
             )
-            .then(() => navigate('/'))
+            .then(() => navigate('/search'))
             .catch((error) => {
                 setEmail('')
                 setPassword('')
@@ -57,7 +57,7 @@ const SignIn = (props) => {
     return (
         <div className='row'>
             <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                <h3 className='m-2'>Let's find your favorite music something...</h3>
+                <h3 className='m-2 logo'>Let's find your favorite music something...</h3>
                 <h5>Sign In</h5>
                 <Form onSubmit={onSignIn}>
                     <Form.Group controlId='email'>
@@ -87,7 +87,7 @@ const SignIn = (props) => {
                     </Button>
                 </Form>
                 <div className='m-2'>
-                    <h3>
+                    <h3 className='logo'>
                         Not a member? Please, sign up  
                         <Link to='/sign-up'>  HERE!</Link>
                     </h3>  

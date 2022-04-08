@@ -2,18 +2,15 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 
-// INDEX -> all Comments
-export const getAllComments = (user) => {
-    return axios({url: `${apiUrl}/comments`})
-}
-
-
 // POST -> create function
+
+// since no longer retreiveing comments from favorites, we will retrieve from seatgeek id 
+// 
 export const postComment = (user, favoriteId, newComment) => {
     console.log('user', user)
     console.log('this is new Comment', newComment)
     return axios({
-        url: `${apiUrl}/comments/${favoriteId}`,
+        url: `${apiUrl}/comments/`,
         method: 'POST',
         data: { comment: newComment }
     })
