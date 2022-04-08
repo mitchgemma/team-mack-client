@@ -32,18 +32,12 @@ const CreateComment = (props) => {
         // e === event
         e.preventDefault()
 
-        console.log('the comment to submit', comment)
-        postComment(user, favorite.id, comment)
+        postComment(user, favorite, comment)
+            console.log('this is the fav', favorite.performers[0].id)
             // if create is successful, we should navigate to the show page
-            .then(res => {navigate(`/favorites/${res.data.favorites.id}`)})
+            .then(res => {navigate(`/favorites/${favorite.performers[0].id}`)})
+            // .then(() => handleClose())
 
-            .then(() =>
-                msgAlert({
-                    heading: 'Comment Added! Success!',
-                    message: 'Awesome!',
-                    variant: 'success',
-                }))
-   
             .catch(() =>
                 msgAlert({
                     heading: 'Oh No!',
@@ -52,7 +46,7 @@ const CreateComment = (props) => {
                 }))
         console.log('this is the comment', comment)
     }
-    console.log('this is show', show)
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton></Modal.Header>

@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import EditCommentModal from './EditCommentModal'
 import { Card, Button } from 'react-bootstrap'
 import CreateComment from './CreateComment'
+import { getOneFavorite } from '../../api/favorites'
 
 const ShowComments = (props) => {
-    const { comment, favorite, user, triggerRefresh, msgAlert } = props
-    console.log('id in showFavorite', comment)
-
+    const [comment, setComment] = useState({})
     const [showEditModal, setShowEditModal] = useState(false)
+    const { id, favorite, user, triggerRefresh, msgAlert } = props
+    // const { id } = useParams()
+    console.log('id in showFavorite', comment)
     
+    useEffect(() => {
+        getOneFavorite(id).then((res) => {
+            console.log('show response', res.data)
+            setComment(res.data)
+        })
+    })
+
     const removeComment = () => {
         removeComment(user, favorite._id, comment._id)
             .then(() =>
