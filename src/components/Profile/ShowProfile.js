@@ -28,8 +28,8 @@ const ShowProfile = (props) => {
   }, [updated])
   console.log('profile in show', profile)
 
-  return (
-    <>
+    return (
+      <>
       <Container className="fluid">
         <Card>
           <Card.Header>{profile.firstName}</Card.Header>
@@ -53,7 +53,7 @@ const ShowProfile = (props) => {
               onClick={() => setModalOpen(true)}
               className="m-2"
               variant="warning"
-            >
+              >
               Edit Profile
             </Button>
           </Card.Footer>
@@ -66,9 +66,10 @@ const ShowProfile = (props) => {
         triggerRefresh={() => setUpdated((prev) => !prev)}
         updateProfile={updateProfile}
         handleClose={() => setModalOpen(false)}
-      />
+        />
     </>
   )
 }
+
 
 export default ShowProfile

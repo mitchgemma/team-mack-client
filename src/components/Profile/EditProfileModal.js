@@ -38,7 +38,8 @@ const EditProfileModal = (props) => {
 
     updateProfile(user, editProfile, _id)
             .then(() => handleClose())
-            .then(() => triggerRefresh())
+        .then(() => triggerRefresh())
+          .catch(error => console.log(error))
       
   }
      return (

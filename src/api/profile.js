@@ -20,8 +20,11 @@ export const createProfile = (user, newProfile) => {
       console.log('user', user)
       console.log('this is newProfile', updatedProfile)
       return axios({
-          url: `${apiUrl}/user/${_id}`,
-          method: 'PATCH',
+        url: `${apiUrl}/user/${_id}`,
+        method: 'PATCH',
+        headers: {
+        Authorization: `Token token=${user.token}`,
+        },
           data: { profile: updatedProfile }
       })
   }

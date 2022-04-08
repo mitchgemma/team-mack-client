@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from 'react-router-dom'
+import ShowProfile from '../Profile/ShowProfile'
 
 const linkStyle = {
   color: 'black',
@@ -42,7 +43,7 @@ const authenticatedOptions = (
       </Link>
       <br />
       <Link to="addprofile" style={linkStyle}>
-        Add Profile
+        Profile
       </Link>
       <br />
     </NavDropdown>
