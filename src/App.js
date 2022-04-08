@@ -17,7 +17,6 @@ import ShowFavorite from './components/Favorites/ShowFavorite'
 import GetSearch from './components/Search/GetSearch'
 import CreateProfile from './components/Profile/CreateProfile'
 import ShowProfile from './components/Profile/ShowProfile'
-import IndexComments from './components/Comments/IndexComments'
 import SearchShow from './components/Search/SearchShow'
 
 const App = () => {
