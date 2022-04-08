@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-//import { getAllSearch } from '../../api/search.js'
-import apiUrl from '../../apiConfig.js';
-//import { useNavigate } from 'react-router-dom';
-//import {getSearchSuccess, getSearchFailure} from '../shared/AutoDismissAlert/messages'
-import SearchShow from '../Search/SearchShow'
 
 
 const cardContainerLayout = {
@@ -21,32 +16,78 @@ const SearchIndex = (props) => {
     if (searchResults === null) {
         return (
             <>
-                <h3>Please search for something</h3>
+                <h3>SEARCH HERE</h3>
             </>
         )
     }
-
+    // if props.search.map === events, venues etc.
 
     else {
-        searchCards = searchResults.map(searchItem => (
-            // one method of styling, usually reserved for a single style
-            // we can use inline, just like in html
+        if (search.type === 'performers') {
 
-            <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
-                <Link style={{ textDecoration: "none" }}
-                    to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
-                    {searchItem.name}
-                    <Card.Header>
-                    </Card.Header>
-                    <Card.Body>
-                        <Card.Text>
-                            <Card.Img variant="bottom" src={searchItem.image} />
-                        </Card.Text>
-                    </Card.Body>
-                </Link>
-            </Card>
+            searchCards = searchResults.map(searchItem => (
+                // one method of styling, usually reserved for a single style
+                // we can use inline, just like in html
 
-        ))
+                <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
+                    <Link style={{ textDecoration: "none" }}
+                        to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
+                        {searchItem.name}
+                        <Card.Header>
+                        </Card.Header>
+                        <Card.Body>
+                            <Card.Text>
+                                <Card.Img variant="bottom" src={searchItem.image} />
+                            </Card.Text>
+                        </Card.Body>
+                    </Link>
+                </Card>
+
+            ))
+        } if (search.type === 'events') {
+            searchCards = searchResults.map(searchItem => (
+                // one method of styling, usually reserved for a single style
+                // we can use inline, just like in html
+
+                <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
+                    <Link style={{ textDecoration: "none" }}
+                        to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
+                        {searchItem.name}
+                        <Card.Header>
+                            {searchItem.short_title}
+                        </Card.Header>
+                        <Card.Body>
+                            <Card.Text>
+                                {searchItem.datetime_local}
+                            </Card.Text>
+                        </Card.Body>
+                    </Link>
+                </Card>
+            ))
+        } if (search.type === 'venues') {
+            searchCards = searchResults.map(searchItem => (
+                // one method of styling, usually reserved for a single style
+                // we can use inline, just like in html
+
+                <Card key={searchItem.id} style={{ width: '30%' }} className="m-2">
+                    <Link style={{ textDecoration: "none" }}
+                        to={`/search/${search.type}/${search.name}/${searchItem.id}`}>
+                        {searchItem.name}
+                        <Card.Header>
+                            {searchItem.name}
+                            <small>
+                                {searchItem.city}, {searchItem.state}
+                            </small>
+                        </Card.Header>
+                        <Card.Body>
+                            <Card.Text>
+                                {searchItem.url}
+                            </Card.Text>
+                        </Card.Body>
+                    </Link>
+                </Card>
+            ))
+        }
 
     }
     return (
