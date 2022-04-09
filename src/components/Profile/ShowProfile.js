@@ -19,7 +19,7 @@ const ShowProfile = (props) => {
     const [updated, setUpdated] = useState(false)
 
   console.log('id in showProfile', id)
-
+ 
   useEffect(() => {
     getProfile(id).then((res) => {
       console.log('show response', res.data)
