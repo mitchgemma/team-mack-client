@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import { postComment } from '../../api/comments'
 import {Modal} from 'react-bootstrap'
 import CommentForm from '../shared/CommentForm'
-import { useNavigate } from 'react-router-dom'
+import { postComment } from '../../api/comments'
 
 const CreateComment = (props) => {
-    const {user, favorite, handleClose, msgAlert, show } = props
-    const navigate = useNavigate()
+    const {user, favorite, show, handleClose, msgAlert, triggerRefresh } = props
     const [comment, setComment] = useState({})
-    console.log('comment in create', comment)
 
     const handleChange = (e) => {
         // e === event
@@ -17,7 +14,7 @@ const CreateComment = (props) => {
         setComment(prevComment => {
             const name = e.target.name
             let value = e.target.value
-            console.log('etarget type', e.target.type)
+            // console.log('etarget type', e.target.type)
            
             const updatedValue = { [name]: value }
 
@@ -32,12 +29,11 @@ const CreateComment = (props) => {
         // e === event
         e.preventDefault()
 
-        postComment(user, favorite, comment)
-            console.log('this is the fav', favorite.performers[0].id)
+        postComment(user, favorite._id, comment)
+            // console.log('this is the fav', favorite.performers[0].id)
             // if create is successful, we should navigate to the show page
-            .then(res => {navigate(`/favorites/${favorite.performers[0].id}`)})
-            // .then(() => handleClose())
-
+            .then(() => handleClose())
+            .then(() => triggerRefresh())
             .catch(() =>
                 msgAlert({
                     heading: 'Oh No!',

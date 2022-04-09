@@ -103,30 +103,30 @@ const App = () => {
 							<ShowFavorite msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
-        <Route
-          path="/addprofile"
-          element={
-            <RequireAuth user={user}>
-              <CreateProfile msgAlert={msgAlert} user={user} />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/user/:id"
-          element={<ShowProfile msgAlert={msgAlert} user={user} />}
-        />
-			</Routes>
-			{msgAlerts.map((msgAlert) => (
-				<AutoDismissAlert
-					key={msgAlert.id}
-					heading={msgAlert.heading}
-					variant={msgAlert.variant}
-					message={msgAlert.message}
-					id={msgAlert.id}
-					deleteAlert={deleteAlert}
+				<Route
+				path="/addprofile"
+				element={
+					<RequireAuth user={user}>
+					<CreateProfile msgAlert={msgAlert} user={user} />
+					</RequireAuth>
+				}
 				/>
-			))}
-		</Fragment>
+				<Route
+				path="/user/:id"
+				element={<ShowProfile msgAlert={msgAlert} user={user} />}
+				/>
+				</Routes>
+					{msgAlerts.map((msgAlert) => (
+						<AutoDismissAlert
+							key={msgAlert.id}
+							heading={msgAlert.heading}
+							variant={msgAlert.variant}
+							message={msgAlert.message}
+							id={msgAlert.id}
+							deleteAlert={deleteAlert}
+						/>
+					))}
+				</Fragment>
 	)
 }
 
