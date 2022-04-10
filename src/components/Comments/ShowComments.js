@@ -1,33 +1,23 @@
-import React, { useEffect, useState } from 'react'
-// import EditCommentModal from './EditCommentModal'
-import { Card, Button } from 'react-bootstrap'
-import CreateComment from './CreateComment'
-import { getOneFavorite } from '../../api/favorites'
+import { Card } from 'react-bootstrap'
 
 const ShowComments = (props) => {
-    const [comment, setComment] = useState({})
-    const [showEditModal, setShowEditModal] = useState(false)
-    const { id, favorite, user, triggerRefresh, msgAlert } = props
-    // const { id } = useParams()
+
+    const { comment, favorite, user, triggerRefresh, msgAlert } = props
+
     console.log('id in showFavorite', comment)
     
-    useEffect(() => {
-        getOneFavorite(id).then((res) => {
-            console.log('show response', res.data)
-            setComment(res.data)
-        })
-    })
+    // useEffect(() => {
+    //     getOneFavorite(id).then((res) => {
+    //         console.log('show response', res.data)
+    //         setComment(res.data)
+    //     })
+    // })
 
     const removeComment = () => {
         removeComment(user, favorite._id, comment._id)
-            .then(() =>
-                msgAlert({
-                    heading: 'Comment updated!',
-                    message: 'Added to your favs.',
-                    variant: 'success',
-                }))
+
             .then(() => triggerRefresh())
-            // if there is an error, we'll send an error message
+
             .catch(() =>
                 msgAlert({
                     heading: 'Oh No!',
@@ -44,7 +34,7 @@ const ShowComments = (props) => {
                         {comment.text}
                     </small><br/>
                     {
-                        user && (user.id === comment.owner.id) 
+                        user && (user.id === favorite.owner.id) 
                         ?
                             <>
                                 {/* <Button variant="warning" onClick={() => setShowEditModal(true)}>
@@ -59,7 +49,7 @@ const ShowComments = (props) => {
                     }
                 </Card.Body>
             </Card>
-            <CreateComment
+            {/* <CreateComment
                 user={user}
                 favorite={favorite}
                 comment={comment}
@@ -67,7 +57,7 @@ const ShowComments = (props) => {
                 handleClose={() => setShowEditModal(false)}
                 msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
-            />
+            /> */}
         </>
         )
 }

@@ -77,6 +77,9 @@ const SearchShow = (props) => {
                         <Card.Text>
                             <Card.Img variant="bottom" src={showResult.image} />
                         </Card.Text>
+                        <Button>
+                        Add to Favorite
+                        </Button>
                     </Card.Body>
                 </Card>
                 <Link style={{ textDecoration: "none" }}
@@ -99,6 +102,9 @@ const SearchShow = (props) => {
                         <Card.Text>
                             {showResult.datetime_local}
                         </Card.Text>
+                        <Button>
+                        Add to Favorite
+                        </Button>
                     </Card.Body>
                 </Card>
                 <Link style={{ textDecoration: "none" }}
@@ -123,6 +129,9 @@ const SearchShow = (props) => {
                         <Card.Text>
                             {showResult.url}
                         </Card.Text>
+                        <Button>
+                        Add to Favorite
+                        </Button>
                     </Card.Body>
                 </Card>
                 <Link style={{ textDecoration: "none" }}

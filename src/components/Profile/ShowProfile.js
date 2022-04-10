@@ -18,7 +18,7 @@ const ShowProfile = (props) => {
   const { user } = props
     const [updated, setUpdated] = useState(false)
 
-  console.log('id in showProfile', id)
+  console.log('id in showPet', id)
 
   useEffect(() => {
     getProfile(id).then((res) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getOneFavorite, removeFavorite } from '../../api/favorites'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
-import {showFavoriteSuccess, showFavoriteFailure} from '../shared/AutoDismissAlert/messages'
+import { showFavoriteFailure } from '../shared/AutoDismissAlert/messages'
 import ShowComments from '../Comments/ShowComments'
 import CreateComment from '../Comments/CreateComment'
 
@@ -10,21 +10,16 @@ import CreateComment from '../Comments/CreateComment'
 const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
     const [commentModalOpen, setCommentModalOpen] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const { user, msgAlert } = props
     const { id } = useParams()
     const navigate = useNavigate()
-    // console.log('id in showFavorite', favorite)
-    console.log('id in props', props)
 
-    
+    console.log('this is the favorite id', id)
+
     useEffect(() => {
         getOneFavorite(id)
-            .then(res => {
-                setFavorite(res.data.favorite)
-                console.log ('this is the res data favorite', res.data.favorite)
-                console.log ('this is the res data ', res.data)
-            }
-                )
+            .then(res => setFavorite(res.data.favorite))
             
             .catch(() => {
                 msgAlert({
@@ -33,19 +28,13 @@ const ShowFavorite = (props) => {
                     variant: 'danger',
                 })
             })
-    }, [])
+    }, [updated])
     
     // function to remove the favorite at click
     const removeTheFav = () => {
-        removeFavorite(user,id)
-            .then(() => {
-                msgAlert({
-                    heading: 'your pick was removed from your favorites',
-                    message: 'theyre gone',
-                    variant: 'success',
-                })
-            })
-            .then(() => {navigate(`/favorites`)})
+        removeFavorite(user, id)
+            
+            .then(() => {navigate(`/favorites/id`)})
             .catch(() => {
                 msgAlert({
                     heading: 'something went wrong',
@@ -60,11 +49,10 @@ const ShowFavorite = (props) => {
         console.log('this is the favorite', favorite)
         if (favorite.comments) {
             commentCards = favorite.comments.map(comment => (
-                // need to pass all props needed for updateToy func in edit modal
                 <ShowComments
                     key={comment._id} comment={comment} favorite={favorite} 
                     user={user} msgAlert={msgAlert}
-                    // triggerRefresh={() => setUpdated(prev => !prev)}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
                 />
             ))
         }
@@ -135,7 +123,7 @@ const ShowFavorite = (props) => {
                             show={commentModalOpen}
                             user={user}
                             msgAlert={msgAlert}
-                            // triggerRefresh={() => setUpdated(prev => !prev)}
+                            triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
                     </Card.Footer>
