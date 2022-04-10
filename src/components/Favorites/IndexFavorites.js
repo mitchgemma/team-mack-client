@@ -20,12 +20,7 @@ const IndexFavorites = (props) => {
                 console.log('this is the favorite data', res.data)
                 setFavorites(res.data.favorites)
             })
-            .then(() =>
-                msgAlert({
-                    heading: 'Here are all your favorite picks!',
-                    message: indexFavoritesSuccess,
-                    variant: 'success',
-            }))
+            
             .catch(() =>
                 msgAlert({
                     heading: 'Oh No!',

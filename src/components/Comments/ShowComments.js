@@ -3,9 +3,7 @@ import { Card } from 'react-bootstrap'
 const ShowComments = (props) => {
 
     const { comment, favorite, user, triggerRefresh, msgAlert } = props
-
-    console.log('id in showFavorite', comment)
-    
+   
     // useEffect(() => {
     //     getOneFavorite(id).then((res) => {
     //         console.log('show response', res.data)
