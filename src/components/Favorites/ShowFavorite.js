@@ -11,7 +11,7 @@ const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
-    const { user, msgAlert } = props
+    const { user, msgAlert, comment } = props
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -19,7 +19,12 @@ const ShowFavorite = (props) => {
 
     useEffect(() => {
         getOneFavorite(id)
-            .then(res => setFavorite(res.data.favorite))
+            .then(res => {
+                console.log('this is the res.data.favorite', res.data.favorite)
+                setFavorite(res.data.favorite)
+                console.log('this is the res.data.favorite2', res.data.favorite)
+            }
+            )
             
             .catch(() => {
                 msgAlert({
@@ -44,18 +49,31 @@ const ShowFavorite = (props) => {
             })
     }
 
+    //     commentCards = comments.map(comment => (
+        
+        //         <Card key={comment.id} style={{ width: '30%' }} className="m-2" >
+        //             <Card.Header>{comment.text}</Card.Header>
+        //             <Card.Body>
+        //                 <Card.Text>
+        //                 </Card.Text>
+        //             </Card.Body>
+        //         </Card>
+        //     ))
+        // }
+        
+        
+        
     let commentCards
-    if (favorite) {
-        console.log('this is the favorite', favorite)
-        if (favorite.comments) {
-            commentCards = favorite.comments.map(comment => (
-                <ShowComments
-                    key={comment._id} comment={comment} favorite={favorite} 
-                    user={user} msgAlert={msgAlert}
-                    triggerRefresh={() => setUpdated(prev => !prev)}
-                />
-            ))
-        }
+    console.log('this is the **comment', comment)
+    if (comment) {
+        commentCards = comment.map(comment=> (
+            <ShowComments
+                key={id} comment={comment} favorite={favorite} comment={comment}
+                user={user} msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+            />
+        ))
+        
     }
 
     if (!favorite) {

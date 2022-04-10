@@ -12,9 +12,9 @@ export const postComment = (user, id, newComment) => {
     return axios({
         url: `${apiUrl}/comments/${id}`,
         method: 'POST',
-        header: {
-            Authorization:`Token token=${user.token}`
-        },
+        // header: {
+        //     Authorization:`Token token=${user.token}`
+        // },
         data: { comment: newComment }
     })
 }
