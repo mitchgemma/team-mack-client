@@ -6,16 +6,21 @@ import axios from 'axios'
 
 // since no longer retreiveing comments from favorites, we will retrieve from seatgeek id 
 // 
-export const postComment = (user, id, newComment) => {
+export const postComment = (user, seatGeekId, newComment) => {
     console.log('user', user)
     console.log('this is new Comment', newComment)
     return axios({
-        url: `${apiUrl}/comments/${id}`,
+        url: `${apiUrl}/comments/${seatGeekId}`,
         method: 'POST',
         // header: {
         //     Authorization:`Token token=${user.token}`
         // },
-        data: { comment: newComment }
+        data: { comment: {  
+            text: newComment.comment,
+            owner: user._id,
+            seatGeekId: seatGeekId
+             } 
+         }
     })
 }
 
