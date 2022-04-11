@@ -9,19 +9,22 @@ import CreateComment from '../Comments/CreateComment'
 
 const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
+    const [seatGeekId, setSeatGeekId] = useState(null)
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
     const { user, msgAlert, comment } = props
     const { id } = useParams()
     const navigate = useNavigate()
 
-    console.log('this is the favorite id', id)
-
+    
     useEffect(() => {
+        console.log('this is the favorite id', id)
         getOneFavorite(id)
             .then(res => {
                 console.log('this is the res.data.favorite', res.data.favorite)
+                console.log('this is the res.data', res.data)
                 setFavorite(res.data.favorite)
+                setSeatGeekId(res.data.seatGeekId)
                 console.log('this is the res.data.favorite2', res.data.favorite)
             }
             )
@@ -68,7 +71,7 @@ const ShowFavorite = (props) => {
     if (comment) {
         commentCards = comment.map(comment=> (
             <ShowComments
-                key={id} comment={comment} favorite={favorite} comment={comment}
+                key={id} comment={comment} favorite={favorite} seatGeekId={seatGeekId}
                 user={user} msgAlert={msgAlert}
                 triggerRefresh={() => setUpdated(prev => !prev)}
             />
@@ -138,6 +141,8 @@ const ShowFavorite = (props) => {
                         </Button>
                         <CreateComment
                             favorite={favorite}
+                            seatGeekId={seatGeekId}
+                            id={id}
                             show={commentModalOpen}
                             user={user}
                             msgAlert={msgAlert}

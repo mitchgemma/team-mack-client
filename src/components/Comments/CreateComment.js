@@ -4,7 +4,7 @@ import CommentForm from '../shared/CommentForm'
 import { postComment } from '../../api/comments'
 
 const CreateComment = (props) => {
-    const {user, favorite, show, handleClose, msgAlert, triggerRefresh } = props
+    const {user, seatGeekId, id, favorite, show, handleClose, msgAlert, triggerRefresh } = props
     const [comment, setComment] = useState({})
 
     const handleChange = (e) => {
@@ -29,7 +29,7 @@ const CreateComment = (props) => {
         // e === event
         e.preventDefault()
 
-        postComment(user, favorite._id, comment)
+        postComment(user, seatGeekId, comment)
             // console.log('this is the fav', favorite.performers[0].id)
             // if create is successful, we should navigate to the show page
             .then(() => handleClose())
@@ -40,7 +40,10 @@ const CreateComment = (props) => {
                     message: 'Something is wrong!',
                     variant: 'danger',
                 }))
-        console.log('this is the comment', comment)
+        // console.log('this is id', id)
+        // console.log('this is favorite', favorite)
+        // console.log('this is favorite._id', favorite._id)
+        // console.log('this is the comment', comment)
     }
 
     return (
