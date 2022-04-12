@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Modal} from 'react-bootstrap'
+import {Modal, Card} from 'react-bootstrap'
 import CommentForm from '../shared/CommentForm'
 import { postComment } from '../../api/comments'
 
@@ -47,6 +47,7 @@ const CreateComment = (props) => {
     }
 
     return (
+        <div>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
@@ -58,6 +59,7 @@ const CreateComment = (props) => {
                 />
             </Modal.Body>
         </Modal>
+        </div>
     )
 }
 
