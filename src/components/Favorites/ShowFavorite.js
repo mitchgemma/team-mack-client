@@ -51,20 +51,6 @@ const ShowFavorite = (props) => {
                 })
             })
     }
-
-    //     commentCards = comments.map(comment => (
-        
-        //         <Card key={comment.id} style={{ width: '30%' }} className="m-2" >
-        //             <Card.Header>{comment.text}</Card.Header>
-        //             <Card.Body>
-        //                 <Card.Text>
-        //                 </Card.Text>
-        //             </Card.Body>
-        //         </Card>
-        //     ))
-        // }
-        
-        
         
     let commentCards
     console.log('this is the **comment', comment)
@@ -148,6 +134,8 @@ const ShowFavorite = (props) => {
                             msgAlert={msgAlert}
                             triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
+                        />
+                        <ShowComments
                         />
                     </Card.Footer>
                 </Card>

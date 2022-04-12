@@ -1,15 +1,10 @@
 import { Card } from 'react-bootstrap'
+import CreateComment from './CreateComment'
 
 const ShowComments = (props) => {
 
     const { comment, favorite, user, triggerRefresh, msgAlert } = props
    
-    // useEffect(() => {
-    //     getOneFavorite(id).then((res) => {
-    //         console.log('show response', res.data)
-    //         setComment(res.data)
-    //     })
-    // })
 
     const removeComment = () => {
         removeComment(user, favorite._id, comment._id)
@@ -29,33 +24,11 @@ const ShowComments = (props) => {
             <Card className="m-2">
                 <Card.Body>
                     <small>
-                        {comment.text}
+                        <CreateComment />
                     </small><br/>
-                    {
-                        user && (user.id === favorite.owner.id) 
-                        ?
-                            <>
-                                {/* <Button variant="warning" onClick={() => setShowEditModal(true)}>
-                                    Edit Comment
-                                </Button>
-                                <Button onClick={() => removeComment()}variant="danger">
-                                    Delete Comment
-                                </Button> */}
-                            </>
-                        :
-                        null
-                    }
+                    
                 </Card.Body>
             </Card>
-            {/* <CreateComment
-                user={user}
-                favorite={favorite}
-                comment={comment}
-                show={showEditModal}
-                handleClose={() => setShowEditModal(false)}
-                msgAlert={msgAlert}
-                triggerRefresh={triggerRefresh}
-            /> */}
         </>
         )
 }

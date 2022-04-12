@@ -29,3 +29,16 @@ export const removeFavorite = (user, id) => {
         }
     })
 }
+
+// POST -> create favorite
+export const createFavorite = (user, newFavorite) => {
+    console.log('user', user)
+    return axios({
+      url: `${apiUrl}/favorites`,
+      method: 'POST',
+      headers: {
+        Authorization: `Token token=${user.token}`,
+      },
+      data: { favorite: newFavorite },
+    })
+  }
