@@ -113,7 +113,27 @@ const ShowFavorite = (props) => {
   // takes the object key and make it into a sting.
   let typeFav = Object.keys(favorite)
   // console.log ( 'this is the string', typeFav)
-
+// renders VENUES //
+    if ( typeFav[0] === 'venues' ) {
+        return (
+            <Container className="fluid">
+                <Card>
+                    <Card.Header>{favorite.venues[0].name} <br/>
+                        <small>{favorite.venues[0].city}, {favorite.venues[0].state}</small><br/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <small>{favorite.venues[0].url}</small><br/>
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                            Remove the venue
+                        </Button> 
+                    </Card.Footer>
+                </Card>
+            </Container>
+        )
   // let eventDate = moment(favorite.events[0].datetime_local).format("YYYY/MM/DD")
 
     // renders PERFORMERS //    
@@ -184,6 +204,5 @@ const ShowFavorite = (props) => {
       </Container>
     )
   }
-}
 
 export default ShowFavorite
