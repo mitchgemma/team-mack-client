@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getProfile, updateProfile } from '../../api/profile'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 import { Spinner, Container, Card, Button } from 'react-bootstrap'
 import EditProfileModal from './EditProfileModal'
 
@@ -12,24 +12,27 @@ const cardContainerLayout = {
 
 const ShowProfile = (props) => {
   const [profile, setProfile] = useState({})
-    const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  // const [showForm, setModalOpen] = useState(false)
 
   const { id } = useParams()
   const { user } = props
-    const [updated, setUpdated] = useState(false)
+  const [updated, setUpdated] = useState(false)
 
-  console.log('id in showPet', id)
+  console.log('id in showProfile', id)
 
   useEffect(() => {
     getProfile(id).then((res) => {
       console.log('show response', res.data)
-      setProfile(res.data)
+      if (res.data === null) {
+        Navigate('/addprofile')
+      } else setProfile(res.data)
     })
   }, [updated])
   console.log('profile in show', profile)
 
-    return (
-      <>
+  return (
+    <>
       <Container className="fluid">
         <Card>
           <Card.Header>{profile.firstName}</Card.Header>
@@ -53,7 +56,7 @@ const ShowProfile = (props) => {
               onClick={() => setModalOpen(true)}
               className="m-2"
               variant="warning"
-              >
+            >
               Edit Profile
             </Button>
           </Card.Footer>
@@ -66,10 +69,9 @@ const ShowProfile = (props) => {
         triggerRefresh={() => setUpdated((prev) => !prev)}
         updateProfile={updateProfile}
         handleClose={() => setModalOpen(false)}
-        />
+      />
     </>
   )
 }
-
 
 export default ShowProfile

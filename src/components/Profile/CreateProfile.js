@@ -3,6 +3,7 @@ import { createProfile } from '../../api/profile'
 import { useNavigate } from 'react-router-dom'
 import ProfileForm from '../shared/ProfileForm'
 import ShowProfile from './ShowProfile'
+import Header from '../shared/Header'
 
 const CreateProfile = (props) => {
   const { user, msgAlert } = props
@@ -55,15 +56,16 @@ const CreateProfile = (props) => {
       })
   }
 
-  
-    return (
+  return (
+    <>
       <ProfileForm
-      profile={profile}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      heading="Create a new Profile!"
+        profile={profile}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        heading="Create a new Profile!"
       />
-      )   
+    </>
+  )
 }
 
 export default CreateProfile
