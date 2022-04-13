@@ -4,7 +4,7 @@ import CommentForm from '../shared/CommentForm'
 import { postComment } from '../../api/comments'
 
 const CreateComment = (props) => {
-    const {user, seatGeekId, id, favorite, show, handleClose, msgAlert, triggerRefresh } = props
+    const {user, seatGeekId, show, handleClose, msgAlert, triggerRefresh } = props
     const [comment, setComment] = useState({})
 
     const handleChange = (e) => {
@@ -52,6 +52,7 @@ const CreateComment = (props) => {
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
                 <CommentForm
+                    seatGeekId={seatGeekId}
                     comment={comment}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
