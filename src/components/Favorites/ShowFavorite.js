@@ -6,12 +6,13 @@ import { showFavoriteFailure } from '../shared/AutoDismissAlert/messages'
 import ShowComments from '../Comments/ShowComments'
 import CreateComment from '../Comments/CreateComment'
 
+
 const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
     const [seatGeekId, setSeatGeekId] = useState(null)
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
-    const { newComment, user, msgAlert, comment } = props
+    const { user, msgAlert, comment } = props
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -53,67 +54,35 @@ const ShowFavorite = (props) => {
         
     let commentCards
     console.log('this is the **comment', comment)
-    console.log('this is the **comment', newComment)
-        if (comment) {
-            commentCards = comment.map((comment) => (
+    if (comment) {
+        commentCards = comment.map(comment=> (
             <ShowComments
-                key={seatGeekId}
-                comment={comment}
-                favorite={favorite}
-                seatGeekId={seatGeekId}
-                user={user}
-                msgAlert={msgAlert}
-                triggerRefresh={() => setUpdated((prev) => !prev)}
+                key={id} comment={comment} favorite={favorite} seatGeekId={seatGeekId}
+                user={user} msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
             />
-            ))
-  }
+        ))
+        
+    }
+
+    if (!favorite) {
+        return (
+            <Container fluid className="justify-content-center">
+                <Spinner animation="border" role="status" variant="warning" >
+                    <span className="visually-hidden">Loading....</span>
+                </Spinner>
+            </Container>
+        )
+    }
 
 
-  // function to remove the favorite at click
-  const removeTheFav = () => {
-    removeFavorite(user, id)
-      .then(() => {
-        navigate(`/favorites`)
-      })
-      .catch(() => {
-        msgAlert({
-          heading: 'something went wrong',
-          message: 'that aint it',
-          variant: 'danger',
-        })
-      })
-  }
+    // takes the object key and make it into a sting.
+    let typeFav = Object.keys(favorite)
+    // console.log ( 'this is the string', typeFav)
 
-  let commentCards
-  console.log('this is the **comment', comment)
-  if (comment) {
-    commentCards = comment.map((comment) => (
-      <ShowComments
-        key={id}
-        comment={comment}
-        favorite={favorite}
-        seatGeekId={seatGeekId}
-        user={user}
-        msgAlert={msgAlert}
-        triggerRefresh={() => setUpdated((prev) => !prev)}
-      />
-    ))
-  }
+    // let eventDate = moment(favorite.events[0].datetime_local).format("YYYY/MM/DD")
 
-  if (!favorite) {
-    return (
-      <Container fluid className="justify-content-center">
-        <Spinner animation="border" role="status" variant="warning">
-          <span className="visually-hidden">Loading....</span>
-        </Spinner>
-      </Container>
-    )
-  }
-
-  // takes the object key and make it into a sting.
-  let typeFav = Object.keys(favorite)
-  // console.log ( 'this is the string', typeFav)
-// renders VENUES //
+    // renders VENUES //
     if ( typeFav[0] === 'venues' ) {
         return (
             <Container className="fluid">
@@ -134,7 +103,6 @@ const ShowFavorite = (props) => {
                 </Card>
             </Container>
         )
-  // let eventDate = moment(favorite.events[0].datetime_local).format("YYYY/MM/DD")
 
     // renders PERFORMERS //    
     } else if ( typeFav[0] === 'performers' ) {
@@ -164,45 +132,39 @@ const ShowFavorite = (props) => {
                             show={commentModalOpen}
                             user={user}
                             msgAlert={msgAlert}
-                            triggerRefresh={() => setUpdated((prev) => !prev)}
+                            triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
-                        <Container >
-                            {commentCards}  
-                        </Container>
+                        <ShowComments
+                        />
                     </Card.Footer>
                 </Card>
             </Container>
         )
 
     // renders EVENTS //
-  } else if (typeFav[0] === 'events') {
-    return (
-      <Container className="fluid">
-        <Card>
-          <Card.Header>
-            {favorite.events[0].short_title} <br />
-            <small></small>
-            <br />
-          </Card.Header>
-          <Card.Body>
-            <Card.Text>
-              <small> {favorite.events[0].datetime_local} </small>
-              <br />
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer>
-            <Button
-              onClick={() => removeTheFav()}
-              className="m-2"
-              variant="danger"
-            >
-              Remove the event
-            </Button>
-          </Card.Footer>
-        </Card>
-      </Container>
-    )
-  }
+    } else if ( typeFav[0] ===  'events' ) {
+        return (
+        
+            <Container className="fluid">
+                <Card>
+                    <Card.Header>{favorite.events[0].short_title} <br/>
+                        <small></small><br/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <small> {favorite.events[0].datetime_local} </small><br/>
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
+                            Remove the event
+                        </Button>
+                    </Card.Footer>
+                </Card>
+            </Container>   
+        )    
+    }
+}
 
 export default ShowFavorite

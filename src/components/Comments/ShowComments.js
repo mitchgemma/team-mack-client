@@ -5,7 +5,7 @@ import CreateComment from './CreateComment'
 const ShowComments = (props) => {
 
     const { comment, favorite, seatGeekId, user, triggerRefresh, msgAlert } = props
-    console.log("this is comment text", comment.text)
+    console.log("this is comment text", comment)
 
     // const removeComment = () => {
     //     removeComment(user, favorite._id, comment._id)
@@ -25,7 +25,7 @@ const ShowComments = (props) => {
             <Card className="m-2">
                 <Card.Body>
                     <small>
-                        {comment.text}
+                        {/* {comment.text} */}
                     </small><br/>
                     
                 </Card.Body>
