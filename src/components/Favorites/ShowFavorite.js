@@ -12,7 +12,7 @@ const ShowFavorite = (props) => {
     const [seatGeekId, setSeatGeekId] = useState(null)
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
-    const { user, msgAlert, comment } = props
+    const { newComment, user, msgAlert, comment } = props
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -42,7 +42,7 @@ const ShowFavorite = (props) => {
     const removeTheFav = () => {
         removeFavorite(user, id)
             
-            .then(() => {navigate(`/favorites/id`)})
+            .then(() => {navigate(`/favorites`)})
             .catch(() => {
                 msgAlert({
                     heading: 'something went wrong',
@@ -54,16 +54,20 @@ const ShowFavorite = (props) => {
         
     let commentCards
     console.log('this is the **comment', comment)
-    if (comment) {
-        commentCards = comment.map(comment=> (
+    console.log('this is the **comment', newComment)
+        if (comment) {
+            commentCards = comment.map((comment) => (
             <ShowComments
-                key={id} comment={comment} favorite={favorite} seatGeekId={seatGeekId}
-                user={user} msgAlert={msgAlert}
-                triggerRefresh={() => setUpdated(prev => !prev)}
+                key={seatGeekId}
+                comment={comment}
+                favorite={favorite}
+                seatGeekId={seatGeekId}
+                user={user}
+                msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated((prev) => !prev)}
             />
-        ))
-        
-    }
+            ))
+  }
 
     if (!favorite) {
         return (
@@ -132,11 +136,12 @@ const ShowFavorite = (props) => {
                             show={commentModalOpen}
                             user={user}
                             msgAlert={msgAlert}
-                            triggerRefresh={() => setUpdated(prev => !prev)}
+                            triggerRefresh={() => setUpdated((prev) => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
-                        <ShowComments
-                        />
+                        <Container >
+                            {commentCards}  
+                        </Container>
                     </Card.Footer>
                 </Card>
             </Container>
