@@ -43,91 +43,96 @@ const App = () => {
     })
   }
 
-        
-	return (
-		<Fragment>
-			<Header user={user} />
-			<Routes>
-				<Route path='/' element={
-					<RequireAuth user={user} >
-						<Home msgAlert={msgAlert} user={user} />
-					</RequireAuth>
-				} />
-				<Route
-					path='/search'
-					element={<GetSearch msgAlert={msgAlert} user={user} />}
-				/>
-				<Route
-					path='/sign-up'
-					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path='/sign-in'
-					element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path='/sign-out'
-					element={
-						<RequireAuth user={user}>
-							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path='/change-password'
-					element={
-						<RequireAuth user={user}>
-							<ChangePassword msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
+  return (
+    <Fragment>
+      <Header user={user} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RequireAuth user={user}>
+              <Home msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/search"
+          element={<GetSearch msgAlert={msgAlert} user={user} />}
+        />
+        <Route
+          path="/sign-up"
+          element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
+        />
+        <Route
+          path="/sign-in"
+          element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+        />
+        <Route
+          path="/sign-out"
+          element={
+            <RequireAuth user={user}>
+              <SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/change-password"
+          element={
+            <RequireAuth user={user}>
+              <ChangePassword msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
 
-				<Route
-					path='/search/:type/:name'
-					element={<GetSearch msgAlert={msgAlert} user={user} />}
-				/>
-				<Route
-					path='/search/:type/:name/:id'
-					element={<SearchShow msgAlert={msgAlert} user={user} />}
-				/>
-				<Route
-					path='/favorites'
-					element={
-						<RequireAuth user={user}>
-							<IndexFavorites msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
-				<Route
-					path='/favorites/:id'
-					element={
-						<RequireAuth user={user}>
-							<ShowFavorite msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
-				<Route
-				path="/addprofile"
-				element={
-					<RequireAuth user={user}>
-					<CreateProfile msgAlert={msgAlert} user={user} />
-					</RequireAuth>
-				}
-				/>
-				<Route
-				path="/user/:id"
-				element={<ShowProfile msgAlert={msgAlert} user={user} />}
-				/>
-				</Routes>
-					{msgAlerts.map((msgAlert) => (
-						<AutoDismissAlert
-							key={msgAlert.id}
-							heading={msgAlert.heading}
-							variant={msgAlert.variant}
-							message={msgAlert.message}
-							id={msgAlert.id}
-							deleteAlert={deleteAlert}
-						/>
-					))}
-				</Fragment>
-	)
+        <Route
+          path="/search/:type/:name"
+          element={<GetSearch msgAlert={msgAlert} user={user} />}
+        />
+        <Route
+          path="/search/:type/:name/:id"
+          element={<SearchShow msgAlert={msgAlert} user={user} />}
+        />
+        <Route
+          path="/favorites"
+          element={
+            <RequireAuth user={user}>
+              <IndexFavorites msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/favorites/:id"
+          element={
+            <RequireAuth user={user}>
+              <ShowFavorite msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/addprofile"
+          element={
+            <RequireAuth user={user}>
+              <ShowProfile msgAlert={msgAlert} user={user} />
+            </RequireAuth>
+          }
+        />
+        {/* <Route
+          path="/user/:id"
+          element={<ShowProfile msgAlert={msgAlert} user={user} />}
+        /> */}
+      </Routes>
+      {msgAlerts.map((msgAlert) => (
+        <AutoDismissAlert
+          key={msgAlert.id}
+          heading={msgAlert.heading}
+          variant={msgAlert.variant}
+          message={msgAlert.message}
+          id={msgAlert.id}
+          deleteAlert={deleteAlert}
+        />
+      ))}
+    </Fragment>
+  )
 }
 
 export default App
