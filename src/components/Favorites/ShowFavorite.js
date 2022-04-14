@@ -10,9 +10,10 @@ import CreateComment from '../Comments/CreateComment'
 const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
     const [seatGeekId, setSeatGeekId] = useState(null)
+    const [comment, setComment] = useState(null)
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
-    const { user, msgAlert, comment } = props
+    const { user, msgAlert } = props
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -23,9 +24,11 @@ const ShowFavorite = (props) => {
             .then(res => {
                 console.log('this is the res.data.favorite', res.data.favorite)
                 console.log('this is the res.data', res.data)
+                
                 setFavorite(res.data.favorite)
                 setSeatGeekId(res.data.seatGeekId)
-                console.log('this is the res.data.favorite2', res.data.favorite)
+                setComment(res.data.comment)
+                console.log('this is the res.data.comment', res.data.comment)
             }
             )
             
@@ -54,10 +57,11 @@ const ShowFavorite = (props) => {
         
     let commentCards
     console.log('this is the **comment', comment)
-    if (comment) {
-        commentCards = comment.map(comment=> (
-            <ShowComments
-                key={id} comment={comment} favorite={favorite} seatGeekId={seatGeekId}
+    if (favorite.comment.length > 0) {
+        commentCards = favorite.comments.map(comment => (
+            // need to pass all props needed for updateToy func in edit modal
+            <ShowComments 
+                key={seatGeekId} comment={comment} favorite={favorite} 
                 user={user} msgAlert={msgAlert}
                 triggerRefresh={() => setUpdated(prev => !prev)}
             />
@@ -126,7 +130,7 @@ const ShowFavorite = (props) => {
                             Leave a comment
                         </Button>
                         <CreateComment
-                            favorite={favorite}
+                            comment={comment}
                             seatGeekId={seatGeekId}
                             id={id}
                             show={commentModalOpen}
@@ -135,8 +139,7 @@ const ShowFavorite = (props) => {
                             triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
-                        <ShowComments
-                        />
+                        {commentCards}
                     </Card.Footer>
                 </Card>
             </Container>

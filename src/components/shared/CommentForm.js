@@ -7,10 +7,9 @@ const CommentForm = (props) => {
     return (
         <Container className="justify-content-center">
             <Form onSubmit={handleSubmit}>
-                <Form.Label>Submit your comments!</Form.Label>
+                <Form.Label>Comment</Form.Label>
                 <Form.Control 
                     placeholder="enter your thoughts on the performer, event or venue here..."
-                    type='text'
                     name='comment'
                     value={comment.text}
                     onChange={handleChange}

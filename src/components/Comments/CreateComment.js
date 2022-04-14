@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import {Modal, Card} from 'react-bootstrap'
+import { Modal, Card } from 'react-bootstrap'
 import CommentForm from '../shared/CommentForm'
 import { postComment } from '../../api/comments'
 
 const CreateComment = (props) => {
-    const {user, seatGeekId, show, handleClose, msgAlert, triggerRefresh } = props
+    const { user, seatGeekId, show, handleClose, msgAlert, triggerRefresh } = props
     const [comment, setComment] = useState({})
 
     const handleChange = (e) => {
@@ -32,6 +32,11 @@ const CreateComment = (props) => {
         postComment(user, seatGeekId, comment)
             // console.log('this is the fav', favorite.performers[0].id)
             // if create is successful, we should navigate to the show page
+            .then(res => {
+                console.log('res from create', res)
+                console.log('this is res.data.create', res.data.comment)
+                setComment(res.data.comment)
+            })
             .then(() => handleClose())
             .then(() => triggerRefresh())
             .catch(() =>
@@ -60,6 +65,7 @@ const CreateComment = (props) => {
                 />
             </Modal.Body>
         </Modal>
+        {comment.text}
         </div>
     )
 }
