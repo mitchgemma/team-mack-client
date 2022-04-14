@@ -109,17 +109,17 @@ const App = () => {
           }
         />
         <Route
-          path="/profile"
+          path="/addprofile"
           element={
             <RequireAuth user={user}>
               <ShowProfile msgAlert={msgAlert} user={user} />
             </RequireAuth>
           }
         />
-        <Route
+        {/* <Route
           path="/user/:id"
           element={<ShowProfile msgAlert={msgAlert} user={user} />}
-        />
+        /> */}
       </Routes>
       {msgAlerts.map((msgAlert) => (
         <AutoDismissAlert
