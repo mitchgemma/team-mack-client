@@ -109,7 +109,7 @@ const App = () => {
           }
         />
         <Route
-          path="/addprofile"
+          path="/profile"
           element={
             <RequireAuth user={user}>
               <ShowProfile msgAlert={msgAlert} user={user} />
