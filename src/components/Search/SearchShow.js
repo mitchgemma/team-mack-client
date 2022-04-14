@@ -61,8 +61,7 @@ const SearchShow = (props) => {
   console.log('this is the showResult 2', showResult)
   console.log('this is the showResult 2 ID', showResult.id)
   const createTheFavorite = () => {
-    createFavorite(user, showResult)
-      .then(() => {
+    createFavorite(user, showResult).then(() => {
       //   Navigate(`/favorites/${favorite._id}`)
     })
     console.log('button clicked ding dong')

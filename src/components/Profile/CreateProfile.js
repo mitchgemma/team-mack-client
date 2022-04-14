@@ -3,6 +3,7 @@ import { createProfile } from '../../api/profile'
 import { useNavigate } from 'react-router-dom'
 import ProfileForm from '../shared/ProfileForm'
 import ShowProfile from './ShowProfile'
+import Header from '../shared/Header'
 
 const CreateProfile = (props) => {
   const { user, msgAlert } = props
@@ -51,19 +52,20 @@ const CreateProfile = (props) => {
       // if create is successful, we should navigate to the show page
       .then((res) => {
         // NEED TO CREATE SHOW PAGE
-        navigate(`/user/${res.data.profile._id}`)
+        navigate(`/profile`)
       })
   }
 
-  
-    return (
+  return (
+    <>
       <ProfileForm
-      profile={profile}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      heading="Create a new Profile!"
+        profile={profile}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        heading="Create a new Profile!"
       />
-      )   
+    </>
+  )
 }
 
 export default CreateProfile
