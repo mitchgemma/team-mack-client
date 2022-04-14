@@ -76,7 +76,7 @@ const ShowProfile = (props) => {
       </>
     )
   } else {
-    return <CreateProfile />
+    return <CreateProfile user={user} />
   }
 }
 
