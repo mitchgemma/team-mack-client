@@ -15,7 +15,7 @@ const ShowFavorite = (props) => {
     
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
-    const { user, msgAlert } = props
+    const { user, msgAlert, removeComment } = props
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -61,8 +61,8 @@ const ShowFavorite = (props) => {
                 })
             })
     }
-        
 
+        
     if (!favorite) {
         return (
             <Container fluid className="justify-content-center">
@@ -97,6 +97,9 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the venue
                         </Button> 
+                        <Button onClick={() => setCommentModalOpen(true)} className="m-2" variant="info">
+                            Leave a comment
+                        </Button>
                         <CreateComment
                             // comment={comment}
                             seatGeekId={seatGeekId}
@@ -107,9 +110,11 @@ const ShowFavorite = (props) => {
                             triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
-                        {/* <ShowComments 
-                            seatGeekId={seatGeekId}
-                        /> */}
+                        {seatGeekId && 
+                        <ShowComments 
+                            comments={comments}
+                        />
+                        }
                     </Card.Footer>
                 </Card>
             </Container>
@@ -174,6 +179,9 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the event
                         </Button>
+                        <Button onClick={() => setCommentModalOpen(true)} className="m-2" variant="info">
+                            Leave a comment
+                        </Button>
                         <CreateComment
                             // comment={comment}
                             seatGeekId={seatGeekId}
@@ -184,9 +192,11 @@ const ShowFavorite = (props) => {
                             triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
+                        {seatGeekId && 
                         <ShowComments 
-                            seatGeekId={seatGeekId}
+                            comments={comments}
                         />
+                        }
                     </Card.Footer>
                 </Card>
             </Container>   

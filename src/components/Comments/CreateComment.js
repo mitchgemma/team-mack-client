@@ -25,21 +25,6 @@ const CreateComment = (props) => {
         })
     }
 
-    // const handleSubmit = (e) => {
-    //     // e === event
-    //     e.preventDefault()
-    
-    //     createProfile(user, profile)
-    //       // if create is successful, we should navigate to the show page
-    //       .then((res) => {
-    //         navigate(`/`)
-    //       })
-    //       .then((res) => {
-    //         navigate(`/profile`)
-    //       })
-    //   }
-
-
 
     const handleSubmit = (e) => {
         // e === event
