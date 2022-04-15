@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
+import { getAllComments } from '../../api/comments'
+import CreateComment from './CreateComment'
 
 
 const ShowComments = (props) => {
 
-    const { comment, favorite, seatGeekId, user, triggerRefresh, msgAlert } = props
-    console.log("this is show comments, comments:", comment)
+    const { comments, user, triggerRefresh, msgAlert } = props
+    // const [comments, setComments] = useState(null)
+
+    // useEffect (() => {
+    //     getAllComments(seatGeekId)
+    //         .then(res => {
+    //             console.log("this is res.data.comments", res.data.comments)
+    //             setComments(res.data.comments)
+    //         })
+    // }, [])
+
 
     // const removeComment = () => {
     //     removeComment(user, favorite._id, comment._id)
@@ -20,17 +31,18 @@ const ShowComments = (props) => {
     //         }))
     // }
 
+    let commentCards
+    if (comments) {
+        commentCards = comments.map(comment => (
+            comment.text
+        ))
+        
+    }
+
     return (
         <>
-            <Card className="m-2">
-            <Card.Header>Comment</Card.Header>
-                <Card.Body>
-                    <small>
-                        {comment}
-                    </small><br/>
-                    
-                </Card.Body>
-            </Card>
+           
+            {commentCards}
         </>
         )
 }

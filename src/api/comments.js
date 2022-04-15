@@ -1,6 +1,14 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
+// INDEX -> all Comments
+export const getAllComments = (seatGeekId) => {
+    return axios({
+        url: `${apiUrl}/comments/${seatGeekId}`,
+        method: 'GET'
+    })
+}
+
 
 // POST -> create function
 // since no longer retreiveing comments from favorites, we will retrieve from seatgeek id 

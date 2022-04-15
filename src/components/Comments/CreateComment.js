@@ -25,6 +25,22 @@ const CreateComment = (props) => {
         })
     }
 
+    // const handleSubmit = (e) => {
+    //     // e === event
+    //     e.preventDefault()
+    
+    //     createProfile(user, profile)
+    //       // if create is successful, we should navigate to the show page
+    //       .then((res) => {
+    //         navigate(`/`)
+    //       })
+    //       .then((res) => {
+    //         navigate(`/profile`)
+    //       })
+    //   }
+
+
+
     const handleSubmit = (e) => {
         // e === event
         e.preventDefault()
@@ -34,8 +50,8 @@ const CreateComment = (props) => {
             // if create is successful, we should navigate to the show page
             .then(res => {
                 console.log('res from create', res)
-                console.log('this is res.data.create', res.data.comment)
-                setComment(res.data.comment)
+                console.log('this is res.data.create:comment', res.data.comment)
+                setComment({})
             })
             .then(() => handleClose())
             .then(() => triggerRefresh())
@@ -65,7 +81,6 @@ const CreateComment = (props) => {
                 />
             </Modal.Body>
         </Modal>
-        {comment.text}
         </div>
     )
 }

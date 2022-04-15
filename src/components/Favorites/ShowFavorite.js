@@ -5,12 +5,14 @@ import { Spinner, Container, Card, Button } from 'react-bootstrap'
 import { showFavoriteFailure } from '../shared/AutoDismissAlert/messages'
 import ShowComments from '../Comments/ShowComments'
 import CreateComment from '../Comments/CreateComment'
+import { getAllComments } from '../../api/comments'
 
 
 const ShowFavorite = (props) => {
     const [favorite, setFavorite] = useState(null)
     const [seatGeekId, setSeatGeekId] = useState(null)
-    const [comment, setComment] = useState(null)
+    const [comments, setComments] = useState(null)
+    
     const [commentModalOpen, setCommentModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
     const { user, msgAlert } = props
@@ -24,14 +26,17 @@ const ShowFavorite = (props) => {
             .then(res => {
                 console.log('this is the res.data.favorite', res.data.favorite)
                 console.log('this is the res.data', res.data)
-                
                 setFavorite(res.data.favorite)
                 setSeatGeekId(res.data.seatGeekId)
-                setComment(res.data.comment)
-                console.log('this is the res.data.comment', res.data.comment)
+
+                getAllComments(res.data.seatGeekId)
+                    .then(res => {
+                        console.log("this is res.data.comments", res.data.comments)
+                        setComments(res.data.comments)
+                
+            })
             }
             )
-            
             .catch(() => {
                 msgAlert({
                     heading: 'No favorite found',
@@ -40,6 +45,8 @@ const ShowFavorite = (props) => {
                 })
             })
     }, [updated])
+
+
     
     // function to remove the favorite at click
     const removeTheFav = () => {
@@ -55,19 +62,6 @@ const ShowFavorite = (props) => {
             })
     }
         
-    let commentCards
-    console.log('this is the **comment', comment)
-    if (favorite.comment.length > 0) {
-        commentCards = favorite.comments.map(comment => (
-            // need to pass all props needed for updateToy func in edit modal
-            <ShowComments 
-                key={seatGeekId} comment={comment} favorite={favorite} 
-                user={user} msgAlert={msgAlert}
-                triggerRefresh={() => setUpdated(prev => !prev)}
-            />
-        ))
-        
-    }
 
     if (!favorite) {
         return (
@@ -103,6 +97,19 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the venue
                         </Button> 
+                        <CreateComment
+                            // comment={comment}
+                            seatGeekId={seatGeekId}
+                            id={id}
+                            show={commentModalOpen}
+                            user={user}
+                            msgAlert={msgAlert}
+                            triggerRefresh={() => setUpdated(prev => !prev)}
+                            handleClose={() => setCommentModalOpen(false)}
+                        />
+                        {/* <ShowComments 
+                            seatGeekId={seatGeekId}
+                        /> */}
                     </Card.Footer>
                 </Card>
             </Container>
@@ -130,7 +137,7 @@ const ShowFavorite = (props) => {
                             Leave a comment
                         </Button>
                         <CreateComment
-                            comment={comment}
+                            // comment={comment}
                             seatGeekId={seatGeekId}
                             id={id}
                             show={commentModalOpen}
@@ -139,7 +146,11 @@ const ShowFavorite = (props) => {
                             triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setCommentModalOpen(false)}
                         />
-                        {commentCards}
+                        {seatGeekId && 
+                        <ShowComments 
+                            comments={comments}
+                        />
+                        }
                     </Card.Footer>
                 </Card>
             </Container>
@@ -163,6 +174,19 @@ const ShowFavorite = (props) => {
                         <Button onClick={() => removeTheFav()}className="m-2" variant="danger">
                             Remove the event
                         </Button>
+                        <CreateComment
+                            // comment={comment}
+                            seatGeekId={seatGeekId}
+                            id={id}
+                            show={commentModalOpen}
+                            user={user}
+                            msgAlert={msgAlert}
+                            triggerRefresh={() => setUpdated(prev => !prev)}
+                            handleClose={() => setCommentModalOpen(false)}
+                        />
+                        <ShowComments 
+                            seatGeekId={seatGeekId}
+                        />
                     </Card.Footer>
                 </Card>
             </Container>   
