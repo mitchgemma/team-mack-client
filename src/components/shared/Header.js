@@ -44,7 +44,7 @@ const authenticatedOptions = (
         Sign Out
       </Link>
       <br />
-      <Link to="addprofile" style={linkStyle}>
+      <Link to="profile" style={linkStyle}>
         Profile
       </Link>
       <br />
