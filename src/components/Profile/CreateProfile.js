@@ -51,7 +51,9 @@ const CreateProfile = (props) => {
     createProfile(user, profile)
       // if create is successful, we should navigate to the show page
       .then((res) => {
-        // NEED TO CREATE SHOW PAGE
+        navigate(`/`)
+      })
+      .then((res) => {
         navigate(`/profile`)
       })
   }
