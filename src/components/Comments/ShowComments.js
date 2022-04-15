@@ -1,36 +1,62 @@
-import React, { useState } from 'react'
-import { Card } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Container, Button } from 'react-bootstrap'
+import { getOneComment, removeComment } from '../../api/comments'
+import CreateComment from './CreateComment'
 
 
 const ShowComments = (props) => {
 
-    const { comment, favorite, seatGeekId, user, triggerRefresh, msgAlert } = props
-    console.log("this is show comments, comments:", comment)
+    const { comments, id, user, triggerRefresh, msgAlert } = props
+    const [comment, setComment] = useState(null)
 
-    // const removeComment = () => {
-    //     removeComment(user, favorite._id, comment._id)
+    useEffect (() => {
+        getOneComment(id)
+            .then(res => {
+                console.log("this is res.data.comment", res.data.comment)
+                setComment(res.data.comment)
+            })
+    }, [])
 
-    //         .then(() => triggerRefresh())
+    const deleteComment = () => {
+        removeComment(user, comment._id)
 
-    //         .catch(() =>
-    //             msgAlert({
-    //                 heading: 'Oh No!',
-    //                 message: 'that aint it',
-    //                 variant: 'danger',
-    //         }))
-    // }
+            .then(() => triggerRefresh())
+
+            .catch(() =>
+                msgAlert({
+                    heading: 'Oh No!',
+                    message: 'that aint it',
+                    variant: 'danger',
+            }))
+    }
+    
+    let commentCards
+    if (comments) {
+        commentCards = comments.map(comment => (
+            <Container className="fluid">
+                <Card>
+                    <Card.Header></Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            {comment.text}
+                        </Card.Text> 
+                    </Card.Body>
+                    <Button className="m-2" variant="warning">
+                            Edit
+                    </Button>
+                    <Button onClick={() => deleteComment()}className="m-2" variant="danger">
+                        Delete
+                    </Button>    
+                </Card>
+            </Container>
+        ))
+        
+    }
+    
 
     return (
         <>
-            <Card className="m-2">
-            <Card.Header>Comment</Card.Header>
-                <Card.Body>
-                    <small>
-                        {comment}
-                    </small><br/>
-                    
-                </Card.Body>
-            </Card>
+            {commentCards}
         </>
         )
 }
